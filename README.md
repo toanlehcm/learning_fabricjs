@@ -21,3 +21,4 @@
 ## [Fabric.js Tutorial/Crash Course: Part 4 (Animation, Events/Caching, Groups, SVG/JSON State, Images)](https://www.youtube.com/watch?v=pS2CcjZFOHE)
 
     - [Introduction to Fabric.js. Part 2.](http://fabricjs.com/fabric-intro-part-2)
+    - [Namespace: ease](http://fabricjs.com/docs/fabric.util.ease.html)

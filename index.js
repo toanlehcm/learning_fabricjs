@@ -107,7 +107,7 @@ const createCircle = (canvas) => {
     radius: 50,
     fill: "orange",
     left: canvasCenter.left,
-    top: canvasCenter.top,
+    top: -50,
     originX: "center",
     originY: "center",
     cornerColor: "#fff",
@@ -117,6 +117,17 @@ const createCircle = (canvas) => {
 
   canvas.add(circle);
   canvas.renderAll();
+
+  circle.animate("top", canvas.height - 50, {
+    onChange: canvas.renderAll.bind(canvas),
+    onComplete: () => {
+      circle.animate("top", canvasCenter.top, {
+        onChange: canvas.renderAll.bind(canvas),
+        easing: fabric.util.ease.easeOutBounce,
+        duration: 200,
+      });
+    },
+  });
 };
 
 var canvas = initCanvas("canvas");
