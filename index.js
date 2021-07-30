@@ -35,9 +35,22 @@ const setBackground = (url, canvas) => {
 };
 
 var canvas = initCanvas("canvas");
+var mousePressed = false;
 
 setBackground("https://picsum.photos/id/237/500/500", canvas);
 
-canvas.on("mouse:over", (e) => {
-  console.log(e);
+canvas.on("mouse:move", (event) => {
+  if (mousePressed) {
+    var mEvent = event.e;
+    const delta = new fabric.Point(mEvent.movementX, mEvent.movementY);
+    canvas.relativePan(delta);
+  }
+});
+
+canvas.on("mouse:down", (event) => {
+  mousePressed = true;
+});
+
+canvas.on("mouse:up", (event) => {
+  mousePressed = false;
 });
