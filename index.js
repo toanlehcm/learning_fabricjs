@@ -20,6 +20,7 @@ var initCanvas = (id) => {
   return new fabric.Canvas(id, {
     width: 500,
     height: 500,
+    selection: false,
   });
 };
 
@@ -41,6 +42,8 @@ setBackground("https://picsum.photos/id/237/500/500", canvas);
 
 canvas.on("mouse:move", (event) => {
   if (mousePressed) {
+    canvas.setCursor("grab");
+    canvas.renderAll();
     var mEvent = event.e;
     const delta = new fabric.Point(mEvent.movementX, mEvent.movementY);
     canvas.relativePan(delta);
@@ -49,8 +52,12 @@ canvas.on("mouse:move", (event) => {
 
 canvas.on("mouse:down", (event) => {
   mousePressed = true;
+  canvas.setCursor("grab");
+  canvas.renderAll();
 });
 
 canvas.on("mouse:up", (event) => {
   mousePressed = false;
+  canvas.setCursor("default");
+  canvas.renderAll();
 });
