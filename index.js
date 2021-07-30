@@ -89,6 +89,8 @@ const createRect = (canvas) => {
     originX: "center", // The position put the rect.
     originY: "center",
     cornerColor: "#fff",
+    lockScalingX: true,
+    lockScalingY: true,
   });
 
   canvas.add(rect);
@@ -105,6 +107,8 @@ const createCircle = (canvas) => {
     originX: "center",
     originY: "center",
     cornerColor: "#fff",
+    lockScalingX: true,
+    lockScalingY: true,
   });
 
   canvas.add(circle);
