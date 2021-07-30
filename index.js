@@ -91,7 +91,7 @@ const createRect = (canvas) => {
     cornerColor: "#fff",
     // lockScalingX: true,
     // lockScalingY: true,
-    objectCaching: false
+    objectCaching: false,
   });
 
   canvas.add(rect);
@@ -102,12 +102,14 @@ const createRect = (canvas) => {
   });
 
   rect.on("selected", () => {
-    rect.fill = "#fff";
+    // rect.fill = "#fff";
+    rect.set("fill", "#fff");
     canvas.renderAll();
   });
 
   rect.on("deselected", () => {
-    rect.fill = "green";
+    // rect.fill = "green";
+    rect.set("fill", "green");
     canvas.renderAll();
   });
 };
@@ -124,6 +126,7 @@ const createCircle = (canvas) => {
     cornerColor: "#fff",
     lockScalingX: true,
     lockScalingY: true,
+    objectCaching: false,
   });
 
   canvas.add(circle);
@@ -138,6 +141,18 @@ const createCircle = (canvas) => {
         duration: 200,
       });
     },
+  });
+
+  circle.on("selected", () => {
+    // circle.fill = "#fff";
+    circle.set("fill", "#fff");
+    canvas.renderAll();
+  });
+
+  circle.on("deselected", () => {
+    // circle.fill = "orange";
+    circle.set("fill", "orange");
+    canvas.renderAll();
   });
 };
 
