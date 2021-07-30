@@ -8,3 +8,7 @@
     - [Introduction to Fabric.js. Part 4.](http://fabricjs.com/fabric-intro-part-4)
     - [fabric.circleBrush](http://fabricjs.com/docs/fabric.CircleBrush.html)
     - [Class: SprayBrush](http://fabricjs.com/docs/fabric.SprayBrush.html)
+
+## [Fabric.js Tutorial/Crash Course: Part 3 (Color Picker, Clear Canvas, Add Objects, Object Controls)](https://www.youtube.com/watch?v=pIRAUNkKtFY&t=2s)
+
+    - https://jscolor.com/

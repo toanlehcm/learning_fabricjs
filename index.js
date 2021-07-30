@@ -61,8 +61,18 @@ const setPanEvent = (canvas) => {
   });
 };
 
+const setColorListener = () => {
+  const picker = document.getElementById("colorPicker");
+  picker.addEventListener("change", (event) => {
+    color = event.target.value;
+    canvas.freeDrawingBrush.color = color;
+    canvas.renderAll();
+  });
+};
+
 var canvas = initCanvas("canvas");
 var mousePressed = false;
+var color = "#000";
 
 let currentMode;
 const modes = {
@@ -86,9 +96,9 @@ const toggleMode = (mode) => {
       canvas.renderAll();
     } else {
       // canvas.freeDrawingBrush = new fabric.CircleBrush(canvas);
-      canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
-      canvas.freeDrawingBrush.color = "red";
-      canvas.freeDrawingBrush.width = 15;
+      // canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
+      // canvas.freeDrawingBrush.color = "red";
+      // canvas.freeDrawingBrush.width = 15;
       currentMode = modes.drawing;
       canvas.isDrawingMode = true;
       canvas.renderAll();
@@ -96,8 +106,8 @@ const toggleMode = (mode) => {
   }
 };
 
-const drawing = () => {};
-
 setBackground("https://picsum.photos/id/237/500/500", canvas);
 
 setPanEvent(canvas);
+
+setColorListener();
