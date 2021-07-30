@@ -171,13 +171,14 @@ const groupObject = (canvas, group, shouldGroup) => {
   if (shouldGroup) {
     const objects = canvas.getObjects();
     group.val = new fabric.Group(objects, { cornerColor: "white" });
-    clearCanvas(canvas);
+    clearCanvas(canvas, svgState);
     canvas.add(group.val);
     canvas.requestRenderAll();
   } else {
     group.val.destroy();
-    const oldGroup = group.val.getObjects();
-    canvas.remove(group.val);
+    let oldGroup = group.val.getObjects();
+    // canvas.remove(group.val);
+    clearCanvas(canvas, svgState);
     canvas.add(...oldGroup);
     group.val = null;
     canvas.requestRenderAll();
