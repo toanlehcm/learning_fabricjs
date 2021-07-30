@@ -22,3 +22,5 @@
 
     - [Introduction to Fabric.js. Part 2.](http://fabricjs.com/fabric-intro-part-2)
     - [Namespace: ease](http://fabricjs.com/docs/fabric.util.ease.html)
+    - [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader)
+    - [FileReader.readAsDataURL()](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL)

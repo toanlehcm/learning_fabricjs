@@ -184,6 +184,12 @@ const groupObject = (canvas, group, shouldGroup) => {
   }
 };
 
+const imgAdded = (e) => {
+  const inputElem = document.getElementById("myImg");
+  const file = inputElem.files[0];
+  reader.readAsDataURL(file);
+};
+
 var canvas = initCanvas("canvas");
 var svgState = {};
 var mousePressed = false;
@@ -223,8 +229,20 @@ const toggleMode = (mode) => {
   }
 };
 
+const reader = new FileReader();
+
 setBackground(bgURL, canvas);
 
 setPanEvent(canvas);
 
 setColorListener();
+
+const inputFile = document.getElementById("myImg");
+inputFile.addEventListener("change", imgAdded);
+
+reader.addEventListener("load", () => {
+  fabric.Image.fromURL(reader.result, (img) => {
+    canvas.add(img);
+    canvas.requestRenderAll();
+  });
+});
