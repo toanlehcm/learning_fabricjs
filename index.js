@@ -37,3 +37,7 @@ const setBackground = (url, canvas) => {
 var canvas = initCanvas("canvas");
 
 setBackground("https://picsum.photos/id/237/500/500", canvas);
+
+canvas.on("mouse:over", (e) => {
+  console.log(e);
+});
