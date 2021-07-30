@@ -35,44 +35,62 @@ const setBackground = (url, canvas) => {
   });
 };
 
+const setPanEvent = (canvas) => {
+  canvas.on("mouse:move", (event) => {
+    if (mousePressed && currentMode === modes.pan) {
+      canvas.setCursor("grab");
+      canvas.renderAll();
+      var mEvent = event.e;
+      const delta = new fabric.Point(mEvent.movementX, mEvent.movementY);
+      canvas.relativePan(delta);
+    } else if (mousePressed && currentMode == modes.drawing) {
+      canvas.isDrawingMode = true;
+      canvas.renderAll();
+    }
+  });
+
+  canvas.on("mouse:down", (event) => {
+    mousePressed = true;
+    if (currentMode === modes.pan) {
+      canvas.setCursor("grab");
+      canvas.renderAll();
+    }
+  });
+
+  canvas.on("mouse:up", (event) => {
+    mousePressed = false;
+    canvas.setCursor("default");
+    canvas.renderAll();
+  });
+};
+
 var canvas = initCanvas("canvas");
 var mousePressed = false;
 
 let currentMode;
 const modes = {
   pan: "pan",
+  drawing: "drawing",
 };
 
-const togglePan = () => {
-  if (currentMode === modes.pan) {
-    currentMode = "";
-  } else {
-    currentMode = modes.pan;
+const toggleMode = (mode) => {
+  if (mode === modes.pan) {
+    if (currentMode === modes.pan) {
+      currentMode = "";
+    } else {
+      currentMode = modes.pan;
+    }
+  } else if (mode === modes.drawing) {
+    if (currentMode === modes.drawing) {
+      currentMode = "";
+    } else {
+      currentMode = modes.drawing;
+    }
   }
 };
+
+const drawing = () => {};
 
 setBackground("https://picsum.photos/id/237/500/500", canvas);
 
-canvas.on("mouse:move", (event) => {
-  if (mousePressed && currentMode === modes.pan) {
-    canvas.setCursor("grab");
-    canvas.renderAll();
-    var mEvent = event.e;
-    const delta = new fabric.Point(mEvent.movementX, mEvent.movementY);
-    canvas.relativePan(delta);
-  }
-});
-
-canvas.on("mouse:down", (event) => {
-  mousePressed = true;
-  if (currentMode === modes.pan) {
-    canvas.setCursor("grab");
-    canvas.renderAll();
-  }
-});
-
-canvas.on("mouse:up", (event) => {
-  mousePressed = false;
-  canvas.setCursor("default");
-  canvas.renderAll();
-});
+setPanEvent(canvas);
