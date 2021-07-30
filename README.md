@@ -17,3 +17,7 @@
     - [Class: Circle](http://fabricjs.com/docs/fabric.Circle.html)
     - [Fabric.js demos · Controls customization](http://fabricjs.com/controls-customization)
     - [Fabric.js demos · Custom controls api](http://fabricjs.com/controls-api)
+
+## [Fabric.js Tutorial/Crash Course: Part 4 (Animation, Events/Caching, Groups, SVG/JSON State, Images)](https://www.youtube.com/watch?v=pS2CcjZFOHE)
+
+    - [Introduction to Fabric.js. Part 2.](http://fabricjs.com/fabric-intro-part-2)

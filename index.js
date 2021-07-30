@@ -85,7 +85,7 @@ const createRect = (canvas) => {
     height: 100,
     fill: "green",
     left: canvasCenter.left, // The left position of the rect.
-    top: canvasCenter.top,
+    top: -50,
     originX: "center", // The position put the rect.
     originY: "center",
     cornerColor: "#fff",
@@ -95,6 +95,10 @@ const createRect = (canvas) => {
 
   canvas.add(rect);
   canvas.renderAll();
+
+  rect.animate("top", canvasCenter.top, {
+    onChange: canvas.renderAll.bind(canvas),
+  });
 };
 
 const createCircle = (canvas) => {
