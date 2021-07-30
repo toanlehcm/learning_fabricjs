@@ -85,7 +85,8 @@ const toggleMode = (mode) => {
       canvas.isDrawingMode = false;
       canvas.renderAll();
     } else {
-      canvas.freeDrawingBrush = new fabric.CircleBrush(canvas);
+      // canvas.freeDrawingBrush = new fabric.CircleBrush(canvas);
+      canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
       canvas.freeDrawingBrush.color = "red";
       canvas.freeDrawingBrush.width = 15;
       currentMode = modes.drawing;
