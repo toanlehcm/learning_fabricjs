@@ -6,4 +6,4 @@
 
     - [Fabric.js demos · Free drawing](http://fabricjs.com/freedrawing)
     - [Introduction to Fabric.js. Part 4.](http://fabricjs.com/fabric-intro-part-4)
-    - fabric.circleBrush
+    - [fabric.circleBrush](http://fabricjs.com/docs/fabric.CircleBrush.html)
