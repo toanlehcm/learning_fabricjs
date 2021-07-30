@@ -89,8 +89,8 @@ const createRect = (canvas) => {
     originX: "center", // The position put the rect.
     originY: "center",
     cornerColor: "#fff",
-    lockScalingX: true,
-    lockScalingY: true,
+    // lockScalingX: true,
+    // lockScalingY: true,
   });
 
   canvas.add(rect);
@@ -98,6 +98,16 @@ const createRect = (canvas) => {
 
   rect.animate("top", canvasCenter.top, {
     onChange: canvas.renderAll.bind(canvas),
+  });
+
+  rect.on("selected", () => {
+    rect.fill = "#fff";
+    canvas.renderAll();
+  });
+
+  rect.on("deselected", () => {
+    rect.fill = "green";
+    canvas.renderAll();
   });
 };
 
