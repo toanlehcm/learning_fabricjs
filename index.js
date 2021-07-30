@@ -70,12 +70,23 @@ const setColorListener = () => {
   });
 };
 
-const clearCanvas = (canvas) => {
+const clearCanvas = (canvas, state) => {
+  state.val = canvas.toSVG();
   canvas.getObjects().forEach((obj) => {
     if (obj !== canvas.backgroundImage) {
       canvas.remove(obj);
     }
   });
+};
+
+const restoreCanvas = (canvas, state, bgURL) => {
+  if (state.val) {
+    fabric.loadSVGFromString(state.val, (objects) => {
+      objects = objects.filter((o) => o["xlink:href"] !== bgURL);
+      canvas.add(...objects);
+      canvas.requestRenderAll();
+    });
+  }
 };
 
 const createRect = (canvas) => {
@@ -159,7 +170,7 @@ const createCircle = (canvas) => {
 const groupObject = (canvas, group, shouldGroup) => {
   if (shouldGroup) {
     const objects = canvas.getObjects();
-    group.val = new fabric.Group(objects, {cornerColor: 'white'});
+    group.val = new fabric.Group(objects, { cornerColor: "white" });
     clearCanvas(canvas);
     canvas.add(group.val);
     canvas.requestRenderAll();
@@ -174,9 +185,11 @@ const groupObject = (canvas, group, shouldGroup) => {
 };
 
 var canvas = initCanvas("canvas");
+var svgState = {};
 var mousePressed = false;
 var color = "#000";
 var group = {};
+var bgURL = "https://picsum.photos/id/100/500/500";
 
 let currentMode;
 const modes = {
@@ -210,7 +223,7 @@ const toggleMode = (mode) => {
   }
 };
 
-setBackground("https://picsum.photos/id/100/500/500", canvas);
+setBackground(bgURL, canvas);
 
 setPanEvent(canvas);
 

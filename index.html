@@ -10,7 +10,8 @@
   <button onclick="toggleMode(modes.pan)">Toggle pan</button>
   <button onclick="toggleMode(modes.drawing)">Drawing</button>
   Color: <input id="colorPicker" value="#000" data-jscolor="{}">
-  <button onclick="clearCanvas(canvas)">Clear</button>
+  <button onclick="clearCanvas(canvas, svgState)">Clear</button>
+  <button onclick="restoreCanvas(canvas, svgState, bgURL)">Restore</button>
   <canvas id="canvas"></canvas>
 
   <div id="objectButtonsWrapper">
