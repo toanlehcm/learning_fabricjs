@@ -159,11 +159,17 @@ const createCircle = (canvas) => {
 const groupObject = (canvas, group, shouldGroup) => {
   if (shouldGroup) {
     const objects = canvas.getObjects();
-    group.val = new fabric.Group(objects);
+    group.val = new fabric.Group(objects, {cornerColor: 'white'});
     clearCanvas(canvas);
     canvas.add(group.val);
     canvas.requestRenderAll();
   } else {
+    group.val.destroy();
+    const oldGroup = group.val.getObjects();
+    canvas.remove(group.val);
+    canvas.add(...oldGroup);
+    group.val = null;
+    canvas.requestRenderAll();
   }
 };
 
