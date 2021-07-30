@@ -91,6 +91,7 @@ const createRect = (canvas) => {
     cornerColor: "#fff",
     // lockScalingX: true,
     // lockScalingY: true,
+    objectCaching: false
   });
 
   canvas.add(rect);
