@@ -104,13 +104,13 @@ const createRect = (canvas) => {
   rect.on("selected", () => {
     // rect.fill = "#fff";
     rect.set("fill", "#fff");
-    canvas.renderAll();
+    canvas.requestRenderAll();
   });
 
   rect.on("deselected", () => {
     // rect.fill = "green";
     rect.set("fill", "green");
-    canvas.renderAll();
+    canvas.requestRenderAll();
   });
 };
 
@@ -156,9 +156,21 @@ const createCircle = (canvas) => {
   });
 };
 
+const groupObject = (canvas, group, shouldGroup) => {
+  if (shouldGroup) {
+    const objects = canvas.getObjects();
+    group.val = new fabric.Group(objects);
+    clearCanvas(canvas);
+    canvas.add(group.val);
+    canvas.requestRenderAll();
+  } else {
+  }
+};
+
 var canvas = initCanvas("canvas");
 var mousePressed = false;
 var color = "#000";
+var group = {};
 
 let currentMode;
 const modes = {
