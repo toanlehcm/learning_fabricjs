@@ -70,6 +70,14 @@ const setColorListener = () => {
   });
 };
 
+const clearCanvas = (canvas) => {
+  canvas.getObjects().forEach((obj) => {
+    if (obj !== canvas.backgroundImage) {
+      canvas.remove(obj);
+    }
+  });
+};
+
 var canvas = initCanvas("canvas");
 var mousePressed = false;
 var color = "#000";
@@ -106,7 +114,7 @@ const toggleMode = (mode) => {
   }
 };
 
-setBackground("https://picsum.photos/id/237/500/500", canvas);
+setBackground("https://picsum.photos/id/100/500/500", canvas);
 
 setPanEvent(canvas);
 
