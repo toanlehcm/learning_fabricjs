@@ -78,6 +78,39 @@ const clearCanvas = (canvas) => {
   });
 };
 
+const createRect = (canvas) => {
+  const canvasCenter = canvas.getCenter();
+  const rect = new fabric.Rect({
+    width: 100,
+    height: 100,
+    fill: "green",
+    left: canvasCenter.left, // The left position of the rect.
+    top: canvasCenter.top,
+    originX: "center", // The position put the rect.
+    originY: "center",
+    cornerColor: "#fff",
+  });
+
+  canvas.add(rect);
+  canvas.renderAll();
+};
+
+const createCircle = (canvas) => {
+  const canvasCenter = canvas.getCenter();
+  const circle = new fabric.Circle({
+    radius: 50,
+    fill: "orange",
+    left: canvasCenter.left,
+    top: canvasCenter.top,
+    originX: "center",
+    originY: "center",
+    cornerColor: "#fff",
+  });
+
+  canvas.add(circle);
+  canvas.renderAll();
+};
+
 var canvas = initCanvas("canvas");
 var mousePressed = false;
 var color = "#000";
