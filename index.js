@@ -263,17 +263,16 @@ canvasSecond.add(rect2);
 
 function goRight() {
   rect2.left = rect2.left + 10;
-  console.log(rect2.left);
   // canvasSecond.renderAll();
   canvasSecond.requestRenderAll();
 }
 
-fabric.Image.fromURL(bgURL, function (img) {
+fabric.Image.fromURL("minion.png", function (img) {
   img.set({
     // width: 100,
     // height: 100,
-    scaleX: img.width / 1000,
-    scaleY: img.height / 1000,
+    scaleX: img.width / 5000,
+    scaleY: img.height / 5000,
   });
   canvasSecond.add(img);
 
@@ -296,7 +295,17 @@ fabric.Image.fromURL(bgURL, function (img) {
   //   console.log('scaling');
   // });
 
-  img.on("modified", function () {
-    console.log("modified");
-  });
+  // img.on("modified", function () {
+  //   console.log("modified");
+  // });
+});
+
+// Save canvas as image.
+$("#save_as_image").click(function () {
+  $("#canvas_second")
+    .get(0)
+    .toBlob(function (blob) {
+      console.log($("#canvas_second").get(0));
+      saveAs(blob, "myIMG.png");
+    });
 });
