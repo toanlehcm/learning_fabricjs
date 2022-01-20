@@ -247,3 +247,23 @@ reader.addEventListener("load", () => {
     canvas.requestRenderAll();
   });
 });
+
+// --------
+var canvasSecond = new fabric.Canvas("canvas_second");
+
+var rect2 = new fabric.Rect({
+  left: 100,
+  top: 100,
+  fill: "red",
+  width: 200,
+  height: 200,
+});
+
+canvasSecond.add(rect2);
+
+function goRight() {
+  rect2.left = rect2.left + 10;
+  console.log(rect2.left);
+  // canvasSecond.renderAll();
+  canvasSecond.requestRenderAll();
+}
