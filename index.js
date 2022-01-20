@@ -287,4 +287,16 @@ fabric.Image.fromURL(bgURL, function (img) {
     onChange: canvasSecond.renderAll.bind(canvasSecond),
     duration: 1000,
   });
+
+  // img.on('selected', function () {
+  //   console.log('selected');
+  // });
+
+  // img.on('scaling', function () {
+  //   console.log('scaling');
+  // });
+
+  img.on("modified", function () {
+    console.log("modified");
+  });
 });
