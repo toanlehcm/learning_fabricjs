@@ -267,3 +267,24 @@ function goRight() {
   // canvasSecond.renderAll();
   canvasSecond.requestRenderAll();
 }
+
+fabric.Image.fromURL(bgURL, function (img) {
+  img.set({
+    // width: 100,
+    // height: 100,
+    scaleX: img.width / 1000,
+    scaleY: img.height / 1000,
+  });
+  canvasSecond.add(img);
+
+  img.animate("left", "+=500", {
+    onChange: canvasSecond.renderAll.bind(canvasSecond),
+    duration: 1000,
+    easing: fabric.util.ease.easeOutBounce,
+  });
+
+  img.animate("angle", "+=90", {
+    onChange: canvasSecond.renderAll.bind(canvasSecond),
+    duration: 1000,
+  });
+});
