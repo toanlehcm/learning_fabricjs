@@ -19,19 +19,20 @@ function initCanvas() {
     morningImg.set({
       scaleX: CLIENT_WIDTH / morningImg.width,
       scaleY: CLIENT_HEIGHT / 2 / morningImg.height,
+      opacity: OPACITY_SHOW,
     });
 
     canvas.add(morningImg).renderAll();
   });
 
   // Set mid-day image.
-  fabric.Image.fromURL("images/mid_day.png", function (Img) {
+  fabric.Image.fromURL("images/afternoon.png", function (Img) {
     afternoonImg = Img;
 
     afternoonImg.set({
       scaleX: CLIENT_WIDTH / afternoonImg.width,
       scaleY: CLIENT_HEIGHT / 2 / afternoonImg.height,
-      opacity: 0,
+      opacity: OPACITY_HIDE,
     });
 
     canvas.add(afternoonImg).renderAll();
@@ -44,12 +45,29 @@ function initCanvas() {
     eveningImg.set({
       scaleX: CLIENT_WIDTH / eveningImg.width,
       scaleY: CLIENT_HEIGHT / 2 / eveningImg.height,
-      opacity: 0,
+      opacity: OPACITY_HIDE,
     });
 
     canvas.add(eveningImg).renderAll();
   });
 }
+
+// function initImgObj(imgSrc, imgObj, opacityVal, canvas) {
+//   fabric.Image.fromURL(imgSrc, function (Img) {
+//     console.log("img-2: ", Img);
+//     imgObj = Img;
+
+//     imgObj.set({
+//       scaleX: CLIENT_WIDTH / imgObj.width,
+//       scaleY: CLIENT_HEIGHT / 2 / imgObj.height,
+//       opacity: opacityVal,
+//     });
+
+//     canvas.add(imgObj).renderAll();
+
+//     return imgObj;
+//   });
+// }
 
 function dayToNight() {
   DayByDay(morningImg, afternoonImg, eveningImg, canvas);
