@@ -1,4 +1,6 @@
 // var test;
+const CLIENT_WIDTH = document.documentElement.clientWidth;
+const CLIENT_HEIGHT = document.documentElement.clientHeight;
 var canvas, imageObject, tempSrc;
 
 // const show = () => {
@@ -23,15 +25,21 @@ var canvas, imageObject, tempSrc;
 function initCanvas(params) {
   // Initiate a canvas instance
   canvas = new fabric.Canvas("canvas");
-  canvas.setWidth(document.body.scrollWidth);
-  canvas.setHeight(500);
+  canvas.setWidth(CLIENT_WIDTH);
+  canvas.setHeight(CLIENT_HEIGHT / 2);
 
   // Using fromURL method
   fabric.Image.fromURL(
     "images/morning.jpg",
     function (Img) {
       imageObject = Img;
-      canvas.add(Img).renderAll();
+
+      imageObject.set({
+        scaleX: CLIENT_WIDTH / imageObject.width,
+        scaleY: CLIENT_HEIGHT / 2 / imageObject.height,
+      });
+
+      canvas.add(imageObject).renderAll();
     },
     {
       crossorigin: "anonymous",
@@ -57,23 +65,22 @@ function changeImageBtn() {
   }
 
   imageObject.setSrc(
-    imageObject._element.src == tempSrc,
+    (imageObject._element.src = tempSrc),
+    // imageObject.animate("opacity", imageObject.opacity === 1 ? 0 : 1, {
+    //   duration: 500,
 
-    imageObject.animate("opacity", imageObject.opacity === 1 ? 0 : 1, {
-      duration: 500,
+    //   onChange: canvas.renderAll.bind(canvas),
 
-      onChange: canvas.renderAll.bind(canvas),
+    //   // onComplete: function () {
+    //   //   canvas.renderAll();
+    //   // },
 
-      onComplete: function () {
-        canvas.renderAll();
-      },
+    //   easing: fabric.util.ease["easeInQuad"],
+    // }),
 
-      easing: fabric.util.ease["easeInQuad"],
-    })
-
-    // function () {
-    //   canvas.renderAll();
-    // }
+    function () {
+      canvas.renderAll();
+    }
   );
 }
 
