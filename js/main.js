@@ -4,7 +4,7 @@ const OPACITY_HIDE = 0;
 const OPACITY_SHOW = 1;
 const DURATION_TIME = 3000;
 
-var canvas, morningImg, midDayImg, eveningImg;
+var canvas, morningImg, afternoonImg, eveningImg;
 
 function initCanvas() {
   // Initiate a canvas instance
@@ -26,15 +26,15 @@ function initCanvas() {
 
   // Set mid-day image.
   fabric.Image.fromURL("images/mid_day.png", function (Img) {
-    midDayImg = Img;
+    afternoonImg = Img;
 
-    midDayImg.set({
-      scaleX: CLIENT_WIDTH / midDayImg.width,
-      scaleY: CLIENT_HEIGHT / 2 / midDayImg.height,
+    afternoonImg.set({
+      scaleX: CLIENT_WIDTH / afternoonImg.width,
+      scaleY: CLIENT_HEIGHT / 2 / afternoonImg.height,
       opacity: 0,
     });
 
-    canvas.add(midDayImg).renderAll();
+    canvas.add(afternoonImg).renderAll();
   });
 
   // Set evening image.
@@ -52,17 +52,25 @@ function initCanvas() {
 }
 
 function dayToNight() {
-  handleAnimate(morningImg, OPACITY_HIDE, DURATION_TIME, canvas);
+  DayByDay(morningImg, afternoonImg, eveningImg, canvas);
+}
 
-  midDayImg.animate("opacity", OPACITY_SHOW, {
+function nightToDay() {
+  DayByDay(eveningImg, afternoonImg, morningImg, canvas);
+}
+
+function DayByDay(startDay, midDay, endDay, canvas) {
+  handleAnimate(startDay, OPACITY_HIDE, DURATION_TIME, canvas);
+
+  midDay.animate("opacity", OPACITY_SHOW, {
     duration: DURATION_TIME,
 
     onChange: canvas.requestRenderAll.bind(canvas),
 
     onComplete: function () {
-      handleAnimate(midDayImg, OPACITY_HIDE, DURATION_TIME, canvas);
+      handleAnimate(midDay, OPACITY_HIDE, DURATION_TIME, canvas);
 
-      handleAnimate(eveningImg, OPACITY_SHOW, DURATION_TIME, canvas);
+      handleAnimate(endDay, OPACITY_SHOW, DURATION_TIME, canvas);
     },
   });
 }
@@ -72,22 +80,6 @@ function handleAnimate(img, opacityVal, durationTime, canvas) {
     duration: durationTime,
 
     onChange: canvas.requestRenderAll.bind(canvas),
-  });
-}
-
-function nightToDay() {
-  handleAnimate(eveningImg, OPACITY_HIDE, DURATION_TIME, canvas);
-
-  midDayImg.animate("opacity", OPACITY_SHOW, {
-    duration: DURATION_TIME,
-
-    onChange: canvas.requestRenderAll.bind(canvas),
-
-    onComplete: function () {
-      handleAnimate(midDayImg, OPACITY_HIDE, DURATION_TIME, canvas);
-
-      handleAnimate(morningImg, OPACITY_SHOW, DURATION_TIME, canvas);
-    },
   });
 }
 
