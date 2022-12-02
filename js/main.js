@@ -1,7 +1,7 @@
 // var test;
 const CLIENT_WIDTH = document.documentElement.clientWidth;
 const CLIENT_HEIGHT = document.documentElement.clientHeight;
-var canvas, imageObject, tempSrc;
+var canvas, morningImg, midDayImg, eveningImg;
 
 // const show = () => {
 //   console.log("show");
@@ -28,60 +28,71 @@ function initCanvas(params) {
   canvas.setWidth(CLIENT_WIDTH);
   canvas.setHeight(CLIENT_HEIGHT / 2);
 
-  // Using fromURL method
-  fabric.Image.fromURL(
-    "images/morning.jpg",
-    function (Img) {
-      imageObject = Img;
+  // Set morning image.
+  fabric.Image.fromURL("images/morning.jpg", function (Img) {
+    morningImg = Img;
 
-      imageObject.set({
-        scaleX: CLIENT_WIDTH / imageObject.width,
-        scaleY: CLIENT_HEIGHT / 2 / imageObject.height,
-      });
+    morningImg.set({
+      scaleX: CLIENT_WIDTH / morningImg.width,
+      scaleY: CLIENT_HEIGHT / 2 / morningImg.height,
+    });
 
-      canvas.add(imageObject).renderAll();
-    },
-    {
-      crossorigin: "anonymous",
-    }
-  );
+    canvas.add(morningImg).renderAll();
+  });
+
+  // Set mid-day image.
+  fabric.Image.fromURL("images/mid_day.png", function (Img) {
+    midDayImg = Img;
+
+    midDayImg.set({
+      scaleX: CLIENT_WIDTH / midDayImg.width,
+      scaleY: CLIENT_HEIGHT / 2 / midDayImg.height,
+      opacity: 0,
+    });
+
+    canvas.add(midDayImg).renderAll();
+  });
+
+  // Set evening image.
+  fabric.Image.fromURL("images/evening.jpg", function (Img) {
+    eveningImg = Img;
+
+    eveningImg.set({
+      scaleX: CLIENT_WIDTH / eveningImg.width,
+      scaleY: CLIENT_HEIGHT / 2 / eveningImg.height,
+      opacity: 0,
+    });
+
+    canvas.add(eveningImg).renderAll();
+  });
 }
 
 function changeImageBtn() {
-  // Using the setSrc method
-  switch (imageObject._element.src) {
-    default:
-    case "http://192.168.22.101/learning_fabricjs/images/morning.jpg":
-      tempSrc = "images/mid_day.png";
-      break;
+  morningImg.animate("opacity", 0, {
+    duration: 3000,
 
-    case "http://192.168.22.101/learning_fabricjs/images/mid_day.png":
-      tempSrc = "images/evening.jpg";
-      break;
+    onChange: canvas.requestRenderAll.bind(canvas),
+  });
 
-    case "http://192.168.22.101/learning_fabricjs/images/evening.jpg":
-      tempSrc = "images/morning.jpg";
-      break;
-  }
+  midDayImg.animate("opacity", 1, {
+    duration: 3000,
 
-  imageObject.setSrc(
-    (imageObject._element.src = tempSrc),
-    // imageObject.animate("opacity", imageObject.opacity === 1 ? 0 : 1, {
-    //   duration: 500,
+    onChange: canvas.requestRenderAll.bind(canvas),
 
-    //   onChange: canvas.renderAll.bind(canvas),
+    onComplete: function () {
+      midDayImg.animate("opacity", 0, {
+        duration: 3000,
 
-    //   // onComplete: function () {
-    //   //   canvas.renderAll();
-    //   // },
+        onChange: canvas.requestRenderAll.bind(canvas),
+      });
 
-    //   easing: fabric.util.ease["easeInQuad"],
-    // }),
+      eveningImg.animate("opacity", 1, {
+        duration: 3000,
 
-    function () {
-      canvas.renderAll();
-    }
-  );
+        onChange: canvas.requestRenderAll.bind(canvas),
+      });
+    },
+  });
 }
 
 window.onload = function init() {
