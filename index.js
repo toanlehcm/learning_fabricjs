@@ -18,17 +18,25 @@
 // ---------------
 const initCanvas = (id) => {
   return new fabric.Canvas(id, {
-    width: 500,
-    height: 500,
+    width: 820, //"820" height="536"
+    height: 536,
     selection: false,
   });
 };
 
 const setBackground = (url, canvas) => {
-  fabric.Image.fromURL(url, function (img) {
+  fabric.Image.fromURL("img_foreground_good_no_bg.png", function (img) {
     img.set({
-      width: canvas.width,
-      height: canvas.height,
+      // width: canvas.width,
+      // height: canvas.height,
+      // scaleX: 0.17,
+      // scaleY: 0.17,
+      // top: -249
+      // ---------
+      scaleX: 1.45*0.17,
+      scaleY: 1.45*0.17,
+      top: -604,
+      left: -113
     });
     canvas.setBackgroundImage(img);
     canvas.renderAll();
@@ -238,6 +246,8 @@ setPanEvent(canvas);
 
 setColorListener();
 
+drawCanvasTest();
+
 const inputFile = document.getElementById("myImg");
 inputFile.addEventListener("change", imgAdded);
 
@@ -267,25 +277,27 @@ function goRight() {
   canvasSecond.requestRenderAll();
 }
 
-fabric.Image.fromURL("minion.png", function (img) {
+fabric.Image.fromURL("img_foreground_good_no_bg.png", function (img) {
   img.set({
     // width: 100,
     // height: 100,
-    scaleX: img.width / 5000,
-    scaleY: img.height / 5000,
+    scaleX: 0.13,
+    scaleY: 0.13,
+    // left: "center",
+    // top: "center",
   });
   canvasSecond.add(img);
 
-  img.animate("left", "+=500", {
-    onChange: canvasSecond.renderAll.bind(canvasSecond),
-    duration: 1000,
-    easing: fabric.util.ease.easeOutBounce,
-  });
+  // img.animate("left", "+=500", {
+  //   onChange: canvasSecond.renderAll.bind(canvasSecond),
+  //   duration: 1000,
+  //   easing: fabric.util.ease.easeOutBounce,
+  // });
 
-  img.animate("angle", "+=90", {
-    onChange: canvasSecond.renderAll.bind(canvasSecond),
-    duration: 1000,
-  });
+  // img.animate("angle", "+=90", {
+  //   onChange: canvasSecond.renderAll.bind(canvasSecond),
+  //   duration: 1000,
+  // });
 
   // img.on('selected', function () {
   //   console.log('selected');
@@ -309,3 +321,11 @@ $("#save_as_image").click(function () {
       saveAs(blob, "myIMG.png");
     });
 });
+
+function drawCanvasTest() {
+  var c = document.getElementById("canvas_test");
+  var ctx = c.getContext("2d");
+  var img = document.getElementById("scream");
+  // ctx.drawImage(img, 0, -300, c.width*1.45, c.height*1.45);
+  ctx.drawImage(img, -113, -604, img.naturalWidth*1.45*0.17, img.naturalHeight*1.45*0.17);
+}
