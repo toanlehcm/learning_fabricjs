@@ -1,28 +1,12 @@
-// var test;
 const CLIENT_WIDTH = document.documentElement.clientWidth;
 const CLIENT_HEIGHT = document.documentElement.clientHeight;
+const OPACITY_HIDE = 0;
+const OPACITY_SHOW = 1;
+const DURATION_TIME = 3000;
+
 var canvas, morningImg, midDayImg, eveningImg;
 
-// const show = () => {
-//   console.log("show");
-
-//   test.classList.add("show-on-left");
-//   test.classList.remove("hide-on-left");
-// };
-
-// const hide = () => {
-//   console.log("hide");
-
-//   test.classList.add("hide-on-left");
-//   test.classList.remove("show-on-left");
-// };
-
-// const removeClass = () => {
-//   test.classList.remove("show-on-left");
-//   test.classList.remove("hide-on-left");
-// };
-
-function initCanvas(params) {
+function initCanvas() {
   // Initiate a canvas instance
   canvas = new fabric.Canvas("canvas");
   canvas.setWidth(CLIENT_WIDTH);
@@ -67,35 +51,46 @@ function initCanvas(params) {
   });
 }
 
-function changeImageBtn() {
-  morningImg.animate("opacity", 0, {
-    duration: 3000,
+function dayToNight() {
+  handleAnimate(morningImg, OPACITY_HIDE, DURATION_TIME, canvas);
 
-    onChange: canvas.requestRenderAll.bind(canvas),
-  });
-
-  midDayImg.animate("opacity", 1, {
-    duration: 3000,
+  midDayImg.animate("opacity", OPACITY_SHOW, {
+    duration: DURATION_TIME,
 
     onChange: canvas.requestRenderAll.bind(canvas),
 
     onComplete: function () {
-      midDayImg.animate("opacity", 0, {
-        duration: 3000,
+      handleAnimate(midDayImg, OPACITY_HIDE, DURATION_TIME, canvas);
 
-        onChange: canvas.requestRenderAll.bind(canvas),
-      });
+      handleAnimate(eveningImg, OPACITY_SHOW, DURATION_TIME, canvas);
+    },
+  });
+}
 
-      eveningImg.animate("opacity", 1, {
-        duration: 3000,
+function handleAnimate(img, opacityVal, durationTime, canvas) {
+  img.animate("opacity", opacityVal, {
+    duration: durationTime,
 
-        onChange: canvas.requestRenderAll.bind(canvas),
-      });
+    onChange: canvas.requestRenderAll.bind(canvas),
+  });
+}
+
+function nightToDay() {
+  handleAnimate(eveningImg, OPACITY_HIDE, DURATION_TIME, canvas);
+
+  midDayImg.animate("opacity", OPACITY_SHOW, {
+    duration: DURATION_TIME,
+
+    onChange: canvas.requestRenderAll.bind(canvas),
+
+    onComplete: function () {
+      handleAnimate(midDayImg, OPACITY_HIDE, DURATION_TIME, canvas);
+
+      handleAnimate(morningImg, OPACITY_SHOW, DURATION_TIME, canvas);
     },
   });
 }
 
 window.onload = function init() {
-  // test = document.getElementById("test");
   initCanvas();
 };
