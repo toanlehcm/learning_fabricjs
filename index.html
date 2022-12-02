@@ -3,44 +3,21 @@
 
 <head>
   <meta charset="utf-8">
-  <style rel="stylesheet"></style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+  <script src="js/fabric.min.js" type="text/javascript"></script>
+  <script src="js/main.js" type="text/javascript"></script>
 </head>
 
 <body>
-  <img id="scream" width="820" height="536" src="img_foreground_good_pro_no_bg.png" alt="The Scream" style="display: block;">
-  <button onclick="toggleMode(modes.pan)">Toggle pan</button>
-  <button onclick="toggleMode(modes.drawing)">Drawing</button>
-  Color: <input id="colorPicker" value="#000" data-jscolor="{}">
-  <button onclick="clearCanvas(canvas, svgState)">Clear</button>
-  <button onclick="restoreCanvas(canvas, svgState, bgURL)">Restore</button>
+  <!-- <div id="test" class="test">test</div>
+  <button ontouchstart="show()">show</button>
+  <button ontouchstart="hide()">hide</button>
+  <button ontouchstart="removeClass()">remove class</button> -->
+
   <canvas id="canvas"></canvas>
-  <canvas id="canvas_test" width="820" height="536"></canvas>
-
-  <div id="objectButtonsWrapper">
-    <p id="objectTitle">Object</p>
-    <div id="objectButtons">
-      <button onclick="createRect(canvas)">Rect</button>
-      <button onclick="createCircle(canvas)">Circle</button>
-      <button onclick="groupObject(canvas, group, true)">Group</button>
-      <button onclick="groupObject(canvas, group, false)">UnGroup</button>
-    </div>
-  </div>
-
-  <div>
-    <p>Image</p>
-    <input id="myImg" type="file" accept="image/">
-  </div>
-  <!--  -->
-  <canvas id="canvas_second" width="6500" height="4500"></canvas>
-  <button onclick="goRight()">Go right</button>
-  <input id="save_as_image" type="button" value="Save as Image" />
+  <button id="changeImageBtn" ontouchstart="changeImageBtn()" style="width: 100px; height: 50px">change image</button>
 </body>
-
-<script src="jquery-3.4.1.min.js" type="text/javascript"></script>
-<script src="jscolor.min.js" type="text/javascript"></script>
-<script src="fabric.min.js" type="text/javascript"></script>
-<!-- <script src="FileSaver.min.js" type="text/javascript"></script>
-<script src="canvas-to-blob.min.js" type="text/javascript"></script> -->
-<script src="index.js" type="text/javascript"></script>
-
 </html>

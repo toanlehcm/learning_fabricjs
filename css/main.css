@@ -1,0 +1,36 @@
+.test {
+  background: red;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 25%;
+  top: 10%;
+}
+
+.hide-on-left {
+  animation: hidden_to_left 2.5s ease;
+  left: 0%;
+}
+
+@keyframes hidden_to_left {
+  0% {
+    left: 25%;
+  }
+
+  100% {
+    left: 0%;
+  }
+}
+
+.show-on-left {
+  animation: show_from_left 2.5s ease;
+}
+
+@keyframes show_from_left {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 25%;
+  }
+}
