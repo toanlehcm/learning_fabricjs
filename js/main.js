@@ -137,5 +137,5 @@ window.onload = function init() {
 
   alertMsg = document.getElementById("alert_msg");
 
-  // initCanvas();
+  initCanvas();
 };
