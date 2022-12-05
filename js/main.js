@@ -2,7 +2,7 @@ const CLIENT_WIDTH = document.documentElement.clientWidth;
 const CLIENT_HEIGHT = document.documentElement.clientHeight;
 const OPACITY_HIDE = 0;
 const OPACITY_SHOW = 1;
-const DURATION_TIME = 3000;
+var durationTime = 3000;
 
 const VALID_EMPTY = "Please enter time of day";
 const VALID_SUCCESS = "Change time of day successful.";
@@ -82,17 +82,17 @@ function nightToDay() {
 }
 
 function DayByDay(startDay, midDay, endDay, canvas) {
-  handleAnimate(startDay, OPACITY_HIDE, DURATION_TIME, canvas);
+  handleAnimate(startDay, OPACITY_HIDE, durationTime, canvas);
 
   midDay.animate("opacity", OPACITY_SHOW, {
-    duration: DURATION_TIME,
+    duration: durationTime,
 
     onChange: canvas.requestRenderAll.bind(canvas),
 
     onComplete: function () {
-      handleAnimate(midDay, OPACITY_HIDE, DURATION_TIME, canvas);
+      handleAnimate(midDay, OPACITY_HIDE, durationTime, canvas);
 
-      handleAnimate(endDay, OPACITY_SHOW, DURATION_TIME, canvas);
+      handleAnimate(endDay, OPACITY_SHOW, durationTime, canvas);
     },
   });
 }
@@ -106,7 +106,7 @@ function handleAnimate(img, opacityVal, durationTime, canvas) {
 }
 
 // show a message with a type of the input
-function showMessage(input, message, type) {
+function showMessage(message, type) {
   // Set the message.
   alertMsg.innerText = message;
 
@@ -116,25 +116,19 @@ function showMessage(input, message, type) {
   return type;
 }
 
-function showError(input, message) {
-  return showMessage(input, message, false);
-}
-
-function showSuccess(input, message) {
-  return showMessage(input, message, true);
-}
-
 function hasValue(input, mess_valid_empty, mess_valid_success) {
   if (input.value.trim() === "") {
-    return showError(input, mess_valid_empty);
+    return showMessage(mess_valid_empty, false);
   }
 
-  return showSuccess(input, mess_valid_success);
+  durationTime = parseInt(input.value);
+
+  return showMessage(mess_valid_success, true);
 }
 
 function validateForm(event) {
   // stop form submission
-  event.preventDefault();
+  // event.preventDefault();
 
   var formTimeOfDay = document.forms["form_time_of_day"];
 
