@@ -34,3 +34,11 @@
     left: 25%;
   }
 }
+
+.msg_success {
+  color: green;
+}
+
+.msg_error {
+  color: red;
+}

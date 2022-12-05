@@ -4,7 +4,11 @@ const OPACITY_HIDE = 0;
 const OPACITY_SHOW = 1;
 const DURATION_TIME = 3000;
 
+const VALID_EMPTY = "Please enter time of day";
+const VALID_SUCCESS = "Change time of day successful.";
+
 var canvas, morningImg, afternoonImg, eveningImg;
+var alertMsg;
 
 function initCanvas() {
   // Initiate a canvas instance
@@ -101,6 +105,45 @@ function handleAnimate(img, opacityVal, durationTime, canvas) {
   });
 }
 
+// show a message with a type of the input
+function showMessage(input, message, type) {
+  // Set the message.
+  alertMsg.innerText = message;
+
+  // Update the class for the message.
+  alertMsg.className = type ? "msg_success" : "msg_error";
+
+  return type;
+}
+
+function showError(input, message) {
+  return showMessage(input, message, false);
+}
+
+function showSuccess(input, message) {
+  return showMessage(input, message, true);
+}
+
+function hasValue(input, mess_valid_empty, mess_valid_success) {
+  if (input.value.trim() === "") {
+    return showError(input, mess_valid_empty);
+  }
+
+  return showSuccess(input, mess_valid_success);
+}
+
+function validateForm(event) {
+  // stop form submission
+  event.preventDefault();
+
+  var formTimeOfDay = document.forms["form_time_of_day"];
+
+  // validate the form
+  hasValue(formTimeOfDay.elements["time_of_day"], VALID_EMPTY, VALID_SUCCESS);
+}
+
 window.onload = function init() {
+  alertMsg = document.getElementById("alert_msg");
+
   initCanvas();
 };
