@@ -118,7 +118,7 @@ function hasValue(input, msg_valid_empty, msg_valid_success) {
   if (input.value.trim() === "") {
     showMessage(msg_valid_empty, false);
   } else {
-    // durationTime = parseInt(input.value);
+    durationTime = parseInt(input.value);
 
     showMessage(msg_valid_success, true);
   }
