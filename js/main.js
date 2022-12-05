@@ -8,7 +8,7 @@ const VALID_EMPTY = "Please enter time of day";
 const VALID_SUCCESS = "Change time of day successful.";
 
 var canvas, morningImg, afternoonImg, eveningImg;
-var alertMsg;
+var formTimeOfDay, alertMsg;
 
 function initCanvas() {
   // Initiate a canvas instance
@@ -106,38 +106,57 @@ function handleAnimate(img, opacityVal, durationTime, canvas) {
 }
 
 // show a message with a type of the input
-function showMessage(message, type) {
+function showMessage(input, message, type) {
   // Set the message.
-  alertMsg.innerText = message;
+  // alertMsg.innerText = message;
+  const msg = input.parentNode.querySelector("small");
+  msg.innerText = message;
 
   // Update the class for the message.
-  alertMsg.className = type ? "msg_success" : "msg_error";
+  // alertMsg.className = type ? "msg_success" : "msg_error";
 
   return type;
 }
 
-function hasValue(input, mess_valid_empty, mess_valid_success) {
-  if (input.value.trim() === "") {
-    return showMessage(mess_valid_empty, false);
-  }
-
-  durationTime = parseInt(input.value);
-
-  return showMessage(mess_valid_success, true);
+function showError(input, message) {
+  return showMessage(input, message, false);
 }
 
-function validateForm(event) {
-  // stop form submission
-  // event.preventDefault();
+function showSuccess(input) {
+  return showMessage(input, "", true);
+}
 
-  var formTimeOfDay = document.forms["form_time_of_day"];
+function hasValue(input, mess_valid_empty) {
+  if (input.value.trim() === "") {
+    // return showMessage(mess_valid_empty, false);
+    return showError(input, mess_valid_empty);
+  }
+
+  // durationTime = parseInt(input.value);
+
+  // return showMessage(mess_valid_success, true);
+  return showSuccess(input);
+}
+
+function validateFormTime(event) {
+  // stop form submission
+  event.preventDefault();
+
+  // var formTimeOfDay = document.forms["form_time_of_day"];
 
   // validate the form
-  hasValue(formTimeOfDay.elements["time_of_day"], VALID_EMPTY, VALID_SUCCESS);
+  // hasValue(formTimeOfDay.elements["time_of_day"], VALID_EMPTY, VALID_SUCCESS);
+  let nameValid = hasValue(formTimeOfDay.elements["name"], VALID_EMPTY);
+
+  if (nameValid) {
+    alert("Demo only. No form was posted.");
+  }
 }
 
 window.onload = function init() {
+  formTimeOfDay = document.querySelector("#time_of_date");
+
   alertMsg = document.getElementById("alert_msg");
 
-  initCanvas();
+  // initCanvas();
 };
