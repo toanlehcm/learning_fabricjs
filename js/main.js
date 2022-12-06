@@ -130,6 +130,8 @@ function validateFormTime(event) {
 
   // validate the form
   hasValue(formTimeOfDay.elements["duration_time"], VALID_EMPTY, VALID_SUCCESS);
+
+  formTimeOfDay.reset();
 }
 
 window.onload = function init() {
