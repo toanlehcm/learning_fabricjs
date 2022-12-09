@@ -98,7 +98,7 @@ function initImageObj() {
 }
 
 function canvasGoodAddImg() {
-  canvasGoodObj.add(eveningImgGoodObj);
+  // canvasGoodObj.add(eveningImgGoodObj);
   canvasGoodObj.add(afternoonImgGoodObj);
   canvasGoodObj.add(morningImgGoodObj);
   canvasGoodObj.add(clipCircleObj);
@@ -106,27 +106,45 @@ function canvasGoodAddImg() {
 }
 
 function canvasBadAddImg() {
-  canvasBadObj.add(eveningImgBadObj);
+  // canvasBadObj.add(eveningImgBadObj);
   canvasBadObj.add(afternoonImgBadObj);
   canvasBadObj.add(morningImgBadObj);
   canvasBadObj.renderAll();
 }
 
 function dayToNight() {
+  // Transition good image.
   DayByDay(
     morningImgGoodObj,
     afternoonImgGoodObj,
     eveningImgGoodObj,
     canvasGoodObj
   );
+
+  // Transition bad image.
+  DayByDay(
+    morningImgBadObj,
+    afternoonImgBadObj,
+    eveningImgBadObj,
+    canvasBadObj
+  );
 }
 
 function nightToDay() {
+  // Transition good image.
   DayByDay(
     afternoonImgGoodObj,
     morningImgGoodObj,
     eveningImgGoodObj,
     canvasGoodObj
+  );
+
+  // Transition bad image.
+  DayByDay(
+    afternoonImgBadObj,
+    morningImgBadObj,
+    eveningImgBadObj,
+    canvasBadObj
   );
 }
 
