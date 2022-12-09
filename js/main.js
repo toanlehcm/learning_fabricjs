@@ -1,4 +1,4 @@
-var canvasObj, clipCircle;
+var canvasGoodObj, clipCircle;
 var scaleImage = { x: 0, y: 0 };
 var morningImgGoodObj, afternoonImgGoodObj, eveningImgGoodObj;
 var durationTime = 3000;
@@ -15,9 +15,9 @@ eveningImgGood.src = CONST.EVENING_GOOD_IMG;
 
 function initCanvas() {
   // Initiate a canvas instance
-  canvasObj = new fabric.Canvas("canvas");
-  canvasObj.setWidth(CONST.CANVAS_STYLE_WIDTH);
-  canvasObj.setHeight(CONST.CANVAS_STYLE_HEIGHT);
+  canvasGoodObj = new fabric.Canvas("canvasGood");
+  canvasGoodObj.setWidth(CONST.CANVAS_STYLE_WIDTH);
+  canvasGoodObj.setHeight(CONST.CANVAS_STYLE_HEIGHT);
 }
 
 function initImageObj() {
@@ -28,37 +28,23 @@ function initImageObj() {
   scaleImage.x = CONST.CANVAS_STYLE_WIDTH / morningImgGoodObj.width;
   scaleImage.y = CONST.CANVAS_STYLE_HEIGHT / morningImgGoodObj.height;
 
-  setImageObj(
-    [morningImgGoodObj],
-    scaleImage,
-    CONST.CANVAS_STYLE_WIDTH,
-    CONST.CANVAS_STYLE_HEIGHT,
-    CONST.OPACITY_SHOW
-  );
+  setImageObj([morningImgGoodObj], scaleImage, CONST.OPACITY_SHOW);
 
   setImageObj(
     [afternoonImgGoodObj, eveningImgGoodObj],
     scaleImage,
-    CONST.CANVAS_STYLE_WIDTH,
-    CONST.CANVAS_STYLE_HEIGHT,
     CONST.OPACITY_HIDE
   );
 
   getCircleImg(
-    canvasObj,
+    canvasGoodObj,
     morningImgGoodObj,
     afternoonImgGoodObj,
     eveningImgGoodObj
   );
 }
 
-function setImageObj(
-  imageList,
-  scaleImage,
-  canvasStyleWidth,
-  canvasStyleHeight,
-  opacityVal
-) {
+function setImageObj(imageList, scaleImage, opacityVal) {
   imageList.forEach((image) => {
     image.set({
       id: "imageObj",
@@ -84,10 +70,8 @@ function getCircleImg(
   eveningImgObj
 ) {
   clipCircle = new fabric.Circle({
-    // left: CONST.DEFAULT_LENS_POSITION.left,
-    // top: CONST.DEFAULT_LENS_POSITION.top,
-    left: 0,
-    top: 0,
+    left: CONST.DEFAULT_LENS_POSITION.left,
+    top: CONST.DEFAULT_LENS_POSITION.top,
     radius: CONST.DESIRED_RADIUS,
     fill: "#fff",
     selectable: false,
@@ -109,7 +93,7 @@ function dayToNight() {
     morningImgGoodObj,
     afternoonImgGoodObj,
     eveningImgGoodObj,
-    canvasObj
+    canvasGoodObj
   );
 }
 
@@ -118,7 +102,7 @@ function nightToDay() {
     afternoonImgGoodObj,
     morningImgGoodObj,
     eveningImgGoodObj,
-    canvasObj
+    canvasGoodObj
   );
 }
 
