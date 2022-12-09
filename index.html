@@ -13,23 +13,32 @@
 </head>
 
 <body>
-  <canvas id="canvasGood"></canvas>
-  <button id="day_to_night" ontouchstart="dayToNight()" style="width: 100px; height: 50px">day to night</button>
-  <button id="night_to_day" ontouchstart="nightToDay()" style="width: 100px; height: 50px">night to day</button>
+  <div class="wrapper-canvas">
+    <canvas id="canvasBad"></canvas>
+  </div>
 
-  <div class="container">
-    <form action="index.html" method="post" id="time_of_date" onsubmit="return validateFormTime(event)">
-      <div class="field">
-        <label for="name">Duration Time:</label>
-        <input type="number" id="duration_time" name="duration_time" placeholder="Enter your duration time"
-          style="width: 100px; height: 50px" />
-        <small id="alert_msg"></small>
-      </div>
+  <div class="wrapper-canvas">
+    <canvas id="canvasGood"></canvas>
+  </div>
 
-      <div class="field">
-        <button type="submit" class="full" style="width: 100px; height: 50px">Submit</button>
-      </div>
-    </form>
+  <div class="edit-group">
+    <button id="day_to_night" ontouchstart="dayToNight()" style="width: 100px; height: 50px">day to night</button>
+    <button id="night_to_day" ontouchstart="nightToDay()" style="width: 100px; height: 50px">night to day</button>
+
+    <div class="container">
+      <form action="index.html" method="post" id="time_of_date" onsubmit="return validateFormTime(event)">
+        <div class="field">
+          <label for="name">Duration Time:</label>
+          <input type="number" id="duration_time" name="duration_time" placeholder="Enter your duration time"
+            style="width: 100px; height: 50px" />
+          <small id="alert_msg"></small>
+        </div>
+
+        <div class="field">
+          <button type="submit" class="full" style="width: 100px; height: 50px">Submit</button>
+        </div>
+      </form>
+    </div>
   </div>
 </body>
 

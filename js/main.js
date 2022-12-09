@@ -1,47 +1,82 @@
-var canvasGoodObj, clipCircle;
+var canvasGoodObj, canvasBadObj;
 var scaleImage = { x: 0, y: 0 };
 var morningImgGoodObj, afternoonImgGoodObj, eveningImgGoodObj;
+var morningImgBadObj, afternoonImgBadObj, eveningImgBadObj;
+var clipCircle;
 var durationTime = 3000;
 var formTimeOfDay, alertMsg;
 
 var morningImgGood = new Image();
 morningImgGood.src = CONST.MORNING_GOOD_IMG;
 
+var morningImgBad = new Image();
+morningImgBad.src = CONST.MORNING_BAD_IMG;
+
 var afternoonImgGood = new Image();
 afternoonImgGood.src = CONST.AFTERNOON_GOOD_IMG;
+
+var afternoonImgBad = new Image();
+afternoonImgBad.src = CONST.AFTERNOON_BAD_IMG;
 
 var eveningImgGood = new Image();
 eveningImgGood.src = CONST.EVENING_GOOD_IMG;
 
+var eveningImgBad = new Image();
+eveningImgBad.src = CONST.EVENING_BAD_IMG;
+
+/* Initiate a canvas instance. */
 function initCanvas() {
-  // Initiate a canvas instance
-  canvasGoodObj = new fabric.Canvas("canvasGood");
-  canvasGoodObj.setWidth(CONST.CANVAS_STYLE_WIDTH);
-  canvasGoodObj.setHeight(CONST.CANVAS_STYLE_HEIGHT);
+  canvasGoodObj = handleInitCanvas(canvasGoodObj, "canvasGood");
+
+  canvasBadObj = handleInitCanvas(canvasBadObj, "canvasBad");
+}
+
+function handleInitCanvas(canvas, canvasID) {
+  canvas = new fabric.Canvas(canvasID);
+  canvas.setWidth(CONST.CANVAS_STYLE_WIDTH);
+  canvas.setHeight(CONST.CANVAS_STYLE_HEIGHT);
+
+  return canvas;
 }
 
 function initImageObj() {
-  morningImgGoodObj = new fabric.Image(morningImgGood);
-  afternoonImgGoodObj = new fabric.Image(afternoonImgGood);
-  eveningImgGoodObj = new fabric.Image(eveningImgGood);
+  morningImgGoodObj = handleInitImgObj(morningImgGoodObj, morningImgGood);
+  afternoonImgGoodObj = handleInitImgObj(afternoonImgGoodObj, afternoonImgGood);
+  eveningImgGoodObj = handleInitImgObj(eveningImgGoodObj, eveningImgGood);
+
+  morningImgBadObj = handleInitImgObj(morningImgBadObj, morningImgBad);
+  afternoonImgBadObj = handleInitImgObj(afternoonImgBadObj, afternoonImgBad);
+  eveningImgBadObj = handleInitImgObj(eveningImgBadObj, eveningImgBad);
 
   scaleImage.x = CONST.CANVAS_STYLE_WIDTH / morningImgGoodObj.width;
   scaleImage.y = CONST.CANVAS_STYLE_HEIGHT / morningImgGoodObj.height;
 
-  setImageObj([morningImgGoodObj], scaleImage, CONST.OPACITY_SHOW);
+  setImageObj(
+    [morningImgGoodObj, morningImgBadObj],
+    scaleImage,
+    CONST.OPACITY_SHOW
+  );
 
   setImageObj(
-    [afternoonImgGoodObj, eveningImgGoodObj],
+    [
+      afternoonImgGoodObj,
+      afternoonImgBadObj,
+      eveningImgGoodObj,
+      eveningImgBadObj,
+    ],
     scaleImage,
     CONST.OPACITY_HIDE
   );
 
-  getCircleImg(
-    canvasGoodObj,
-    morningImgGoodObj,
-    afternoonImgGoodObj,
-    eveningImgGoodObj
-  );
+  initClipCircle();
+
+  canvasGoodAddImg();
+
+  canvasBadAddImg();
+}
+
+function handleInitImgObj(imgObj, imgSrc) {
+  return (imgObj = new fabric.Image(imgSrc));
 }
 
 function setImageObj(imageList, scaleImage, opacityVal) {
@@ -63,12 +98,7 @@ function setImageObj(imageList, scaleImage, opacityVal) {
 }
 
 // Clip circle.
-function getCircleImg(
-  canvasObj,
-  morningImgObj,
-  afternoonImgObj,
-  eveningImgObj
-) {
+function initClipCircle() {
   clipCircle = new fabric.Circle({
     left: CONST.DEFAULT_LENS_POSITION.left,
     top: CONST.DEFAULT_LENS_POSITION.top,
@@ -80,12 +110,21 @@ function getCircleImg(
     dirty: false,
     globalCompositeOperation: "destination-in",
   });
+}
 
-  // canvasObj.add(eveningImgObj);
-  canvasObj.add(afternoonImgObj);
-  canvasObj.add(morningImgObj);
-  canvasObj.add(clipCircle);
-  canvasObj.renderAll();
+function canvasGoodAddImg() {
+  canvasGoodObj.add(eveningImgGoodObj);
+  canvasGoodObj.add(afternoonImgGoodObj);
+  canvasGoodObj.add(morningImgGoodObj);
+  canvasGoodObj.add(clipCircle);
+  canvasGoodObj.renderAll();
+}
+
+function canvasBadAddImg() {
+  canvasBadObj.add(eveningImgBadObj);
+  canvasBadObj.add(afternoonImgBadObj);
+  canvasBadObj.add(morningImgBadObj);
+  canvasBadObj.renderAll();
 }
 
 function dayToNight() {

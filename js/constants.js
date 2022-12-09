@@ -17,11 +17,17 @@ const CONST = (function () {
     top: CENTER_CANVAS.y - DESIRED_RADIUS,
   };
 
-  const MORNING_GOOD_IMG = "images/morning.jpg";
+  const MORNING_GOOD_IMG = "images/morning_good.jpg";
 
-  const AFTERNOON_GOOD_IMG = "images/afternoon.jpg";
+  const MORNING_BAD_IMG = "images/morning_bad.jpg";
 
-  const EVENING_GOOD_IMG = "images/evening.jpg";
+  const AFTERNOON_GOOD_IMG = "images/afternoon_good.jpg";
+
+  const AFTERNOON_BAD_IMG = "images/afternoon_bad.jpg";
+
+  const EVENING_GOOD_IMG = "images/evening_good.jpg";
+
+  const EVENING_BAD_IMG = "images/evening_bad.jpg";
 
   const OPACITY_HIDE = 0;
   const OPACITY_SHOW = 1;
@@ -34,8 +40,11 @@ const CONST = (function () {
     CANVAS_STYLE_HEIGHT: CANVAS_STYLE_HEIGHT,
     DESIRED_RADIUS: DESIRED_RADIUS,
     MORNING_GOOD_IMG: MORNING_GOOD_IMG,
+    MORNING_BAD_IMG: MORNING_BAD_IMG,
     AFTERNOON_GOOD_IMG: AFTERNOON_GOOD_IMG,
+    AFTERNOON_BAD_IMG: AFTERNOON_BAD_IMG,
     EVENING_GOOD_IMG: EVENING_GOOD_IMG,
+    EVENING_BAD_IMG: EVENING_BAD_IMG,
     OPACITY_HIDE: OPACITY_HIDE,
     OPACITY_SHOW: OPACITY_SHOW,
     VALID_EMPTY: VALID_EMPTY,
