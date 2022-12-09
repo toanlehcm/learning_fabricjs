@@ -1,99 +1,140 @@
-const CLIENT_WIDTH = document.documentElement.clientWidth;
-const CLIENT_HEIGHT = document.documentElement.clientHeight;
-const OPACITY_HIDE = 0;
-const OPACITY_SHOW = 1;
+var canvasObj, clipCircle;
+var scaleImage = { x: 0, y: 0 };
+var morningImgGoodObj, afternoonImgGoodObj, eveningImgGoodObj;
 var durationTime = 3000;
-
-const VALID_EMPTY = "Please enter duration time";
-const VALID_SUCCESS = "Change duration time successful.";
-
-var canvas, morningImg, afternoonImg, eveningImg;
 var formTimeOfDay, alertMsg;
+
+var morningImgGood = new Image();
+morningImgGood.src = CONST.MORNING_GOOD_IMG;
+
+var afternoonImgGood = new Image();
+afternoonImgGood.src = CONST.AFTERNOON_GOOD_IMG;
+
+var eveningImgGood = new Image();
+eveningImgGood.src = CONST.EVENING_GOOD_IMG;
 
 function initCanvas() {
   // Initiate a canvas instance
-  canvas = new fabric.Canvas("canvas");
-  canvas.setWidth(CLIENT_WIDTH);
-  canvas.setHeight(CLIENT_HEIGHT / 2);
+  canvasObj = new fabric.Canvas("canvas");
+  canvasObj.setWidth(CONST.CANVAS_STYLE_WIDTH);
+  canvasObj.setHeight(CONST.CANVAS_STYLE_HEIGHT);
+}
 
-  // Set morning image.
-  fabric.Image.fromURL("images/morning.jpg", function (Img) {
-    morningImg = Img;
+function initImageObj() {
+  morningImgGoodObj = new fabric.Image(morningImgGood);
+  afternoonImgGoodObj = new fabric.Image(afternoonImgGood);
+  eveningImgGoodObj = new fabric.Image(eveningImgGood);
 
-    morningImg.set({
-      scaleX: CLIENT_WIDTH / morningImg.width,
-      scaleY: CLIENT_HEIGHT / 2 / morningImg.height,
-      opacity: OPACITY_SHOW,
+  scaleImage.x = CONST.CANVAS_STYLE_WIDTH / morningImgGoodObj.width;
+  scaleImage.y = CONST.CANVAS_STYLE_HEIGHT / morningImgGoodObj.height;
+
+  setImageObj(
+    [morningImgGoodObj],
+    scaleImage,
+    CONST.CANVAS_STYLE_WIDTH,
+    CONST.CANVAS_STYLE_HEIGHT,
+    CONST.OPACITY_SHOW
+  );
+
+  setImageObj(
+    [afternoonImgGoodObj, eveningImgGoodObj],
+    scaleImage,
+    CONST.CANVAS_STYLE_WIDTH,
+    CONST.CANVAS_STYLE_HEIGHT,
+    CONST.OPACITY_HIDE
+  );
+
+  getCircleImg(
+    canvasObj,
+    morningImgGoodObj,
+    afternoonImgGoodObj,
+    eveningImgGoodObj
+  );
+}
+
+function setImageObj(
+  imageList,
+  scaleImage,
+  canvasStyleWidth,
+  canvasStyleHeight,
+  opacityVal
+) {
+  imageList.forEach((image) => {
+    image.set({
+      id: "imageObj",
+      scaleX: scaleImage.x,
+      scaleY: scaleImage.y,
+      opacity: opacityVal,
+      selectable: false,
+      hasBorders: false,
+      hasControls: false,
+      hasRotatingPoint: false,
+      objectCaching: false,
+      noScaleCache: false,
+      dirty: false,
     });
-
-    canvas.add(morningImg).renderAll();
-  });
-
-  // Set mid-day image.
-  fabric.Image.fromURL("images/afternoon.png", function (Img) {
-    afternoonImg = Img;
-
-    afternoonImg.set({
-      scaleX: CLIENT_WIDTH / afternoonImg.width,
-      scaleY: CLIENT_HEIGHT / 2 / afternoonImg.height,
-      opacity: OPACITY_HIDE,
-    });
-
-    canvas.add(afternoonImg).renderAll();
-  });
-
-  // Set evening image.
-  fabric.Image.fromURL("images/evening.jpg", function (Img) {
-    eveningImg = Img;
-
-    eveningImg.set({
-      scaleX: CLIENT_WIDTH / eveningImg.width,
-      scaleY: CLIENT_HEIGHT / 2 / eveningImg.height,
-      opacity: OPACITY_HIDE,
-    });
-
-    canvas.add(eveningImg).renderAll();
   });
 }
 
-// function initImgObj(imgSrc, imgObj, opacityVal, canvas) {
-//   fabric.Image.fromURL(imgSrc, function (Img) {
-//     console.log("img-2: ", Img);
-//     imgObj = Img;
+// Clip circle.
+function getCircleImg(
+  canvasObj,
+  morningImgObj,
+  afternoonImgObj,
+  eveningImgObj
+) {
+  clipCircle = new fabric.Circle({
+    // left: CONST.DEFAULT_LENS_POSITION.left,
+    // top: CONST.DEFAULT_LENS_POSITION.top,
+    left: 0,
+    top: 0,
+    radius: CONST.DESIRED_RADIUS,
+    fill: "#fff",
+    selectable: false,
+    objectCaching: false,
+    noScaleCache: false,
+    dirty: false,
+    globalCompositeOperation: "destination-in",
+  });
 
-//     imgObj.set({
-//       scaleX: CLIENT_WIDTH / imgObj.width,
-//       scaleY: CLIENT_HEIGHT / 2 / imgObj.height,
-//       opacity: opacityVal,
-//     });
-
-//     canvas.add(imgObj).renderAll();
-
-//     return imgObj;
-//   });
-// }
+  // canvasObj.add(eveningImgObj);
+  canvasObj.add(afternoonImgObj);
+  canvasObj.add(morningImgObj);
+  canvasObj.add(clipCircle);
+  canvasObj.renderAll();
+}
 
 function dayToNight() {
-  DayByDay(morningImg, afternoonImg, eveningImg, canvas);
+  DayByDay(
+    morningImgGoodObj,
+    afternoonImgGoodObj,
+    eveningImgGoodObj,
+    canvasObj
+  );
 }
 
 function nightToDay() {
-  DayByDay(eveningImg, afternoonImg, morningImg, canvas);
+  DayByDay(
+    afternoonImgGoodObj,
+    morningImgGoodObj,
+    eveningImgGoodObj,
+    canvasObj
+  );
 }
 
 function DayByDay(startDay, midDay, endDay, canvas) {
-  handleAnimate(startDay, OPACITY_HIDE, durationTime, canvas);
+  handleAnimate(startDay, CONST.OPACITY_HIDE, durationTime, canvas);
 
-  midDay.animate("opacity", OPACITY_SHOW, {
+  midDay.animate("opacity", CONST.OPACITY_SHOW, {
     duration: durationTime,
 
     onChange: canvas.requestRenderAll.bind(canvas),
 
-    onComplete: function () {
-      handleAnimate(midDay, OPACITY_HIDE, durationTime, canvas);
+    // onComplete: function () {
+    //   handleAnimate(midDay, CONST.OPACITY_HIDE, durationTime, canvas);
 
-      handleAnimate(endDay, OPACITY_SHOW, durationTime, canvas);
-    },
+    //   handleAnimate(endDay, CONST.OPACITY_SHOW, durationTime, canvas);
+    // },
   });
 }
 
@@ -140,4 +181,6 @@ window.onload = function init() {
   alertMsg = document.getElementById("alert_msg");
 
   initCanvas();
+
+  initImageObj();
 };
