@@ -2,7 +2,7 @@ var canvasGoodObj, canvasBadObj;
 var scaleImage = { x: 0, y: 0 };
 var morningImgGoodObj, afternoonImgGoodObj, eveningImgGoodObj;
 var morningImgBadObj, afternoonImgBadObj, eveningImgBadObj;
-var clipCircle;
+var clipCircleObj;
 var durationTime = 3000;
 var formTimeOfDay, alertMsg;
 
@@ -40,24 +40,46 @@ function handleInitCanvas(canvas, canvasID) {
 }
 
 function initImageObj() {
-  morningImgGoodObj = handleInitImgObj(morningImgGoodObj, morningImgGood);
-  afternoonImgGoodObj = handleInitImgObj(afternoonImgGoodObj, afternoonImgGood);
-  eveningImgGoodObj = handleInitImgObj(eveningImgGoodObj, eveningImgGood);
+  morningImgGoodObj = imageUtil.handleInitImgObj(
+    morningImgGoodObj,
+    morningImgGood
+  );
 
-  morningImgBadObj = handleInitImgObj(morningImgBadObj, morningImgBad);
-  afternoonImgBadObj = handleInitImgObj(afternoonImgBadObj, afternoonImgBad);
-  eveningImgBadObj = handleInitImgObj(eveningImgBadObj, eveningImgBad);
+  afternoonImgGoodObj = imageUtil.handleInitImgObj(
+    afternoonImgGoodObj,
+    afternoonImgGood
+  );
+
+  eveningImgGoodObj = imageUtil.handleInitImgObj(
+    eveningImgGoodObj,
+    eveningImgGood
+  );
+
+  morningImgBadObj = imageUtil.handleInitImgObj(
+    morningImgBadObj,
+    morningImgBad
+  );
+
+  afternoonImgBadObj = imageUtil.handleInitImgObj(
+    afternoonImgBadObj,
+    afternoonImgBad
+  );
+
+  eveningImgBadObj = imageUtil.handleInitImgObj(
+    eveningImgBadObj,
+    eveningImgBad
+  );
 
   scaleImage.x = CONST.CANVAS_STYLE_WIDTH / morningImgGoodObj.width;
   scaleImage.y = CONST.CANVAS_STYLE_HEIGHT / morningImgGoodObj.height;
 
-  setImageObj(
+  imageUtil.setImageObj(
     [morningImgGoodObj, morningImgBadObj],
     scaleImage,
     CONST.OPACITY_SHOW
   );
 
-  setImageObj(
+  imageUtil.setImageObj(
     [
       afternoonImgGoodObj,
       afternoonImgBadObj,
@@ -68,55 +90,18 @@ function initImageObj() {
     CONST.OPACITY_HIDE
   );
 
-  initClipCircle();
+  clipCircleObj = imageUtil.initClipCircle();
 
   canvasGoodAddImg();
 
   canvasBadAddImg();
 }
 
-function handleInitImgObj(imgObj, imgSrc) {
-  return (imgObj = new fabric.Image(imgSrc));
-}
-
-function setImageObj(imageList, scaleImage, opacityVal) {
-  imageList.forEach((image) => {
-    image.set({
-      id: "imageObj",
-      scaleX: scaleImage.x,
-      scaleY: scaleImage.y,
-      opacity: opacityVal,
-      selectable: false,
-      hasBorders: false,
-      hasControls: false,
-      hasRotatingPoint: false,
-      objectCaching: false,
-      noScaleCache: false,
-      dirty: false,
-    });
-  });
-}
-
-// Clip circle.
-function initClipCircle() {
-  clipCircle = new fabric.Circle({
-    left: CONST.DEFAULT_LENS_POSITION.left,
-    top: CONST.DEFAULT_LENS_POSITION.top,
-    radius: CONST.DESIRED_RADIUS,
-    fill: "#fff",
-    selectable: false,
-    objectCaching: false,
-    noScaleCache: false,
-    dirty: false,
-    globalCompositeOperation: "destination-in",
-  });
-}
-
 function canvasGoodAddImg() {
   canvasGoodObj.add(eveningImgGoodObj);
   canvasGoodObj.add(afternoonImgGoodObj);
   canvasGoodObj.add(morningImgGoodObj);
-  canvasGoodObj.add(clipCircle);
+  canvasGoodObj.add(clipCircleObj);
   canvasGoodObj.renderAll();
 }
 
