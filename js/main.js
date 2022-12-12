@@ -4,6 +4,7 @@ var morningImgGoodObj, afternoonImgGoodObj, eveningImgGoodObj;
 var morningImgBadObj, afternoonImgBadObj, eveningImgBadObj;
 var clipCircleObj;
 var durationTime = 3000;
+var easing;
 var formTimeOfDay, alertMsg;
 
 var morningImgGood = new Image();
@@ -73,19 +74,18 @@ function initImageObj() {
   scaleImage.x = CONST.CANVAS_STYLE_WIDTH / morningImgGoodObj.width;
   scaleImage.y = CONST.CANVAS_STYLE_HEIGHT / morningImgGoodObj.height;
 
-  imageUtil.setImageObj(
-    [morningImgGoodObj, morningImgBadObj],
-    scaleImage,
-    CONST.OPACITY_SHOW
-  );
+  imageUtil.setImageObj([morningImgGoodObj], scaleImage, CONST.OPACITY_SHOW);
+
+  imageUtil.setImageBadObj([morningImgBadObj], scaleImage, CONST.OPACITY_SHOW);
 
   imageUtil.setImageObj(
-    [
-      afternoonImgGoodObj,
-      afternoonImgBadObj,
-      eveningImgGoodObj,
-      eveningImgBadObj,
-    ],
+    [afternoonImgGoodObj, eveningImgGoodObj],
+    scaleImage,
+    CONST.OPACITY_HIDE
+  );
+
+  imageUtil.setImageBadObj(
+    [afternoonImgBadObj, eveningImgBadObj],
     scaleImage,
     CONST.OPACITY_HIDE
   );
@@ -149,26 +149,32 @@ function nightToDay() {
 }
 
 function DayByDay(startDay, midDay, endDay, canvas) {
-  handleAnimate(startDay, CONST.OPACITY_HIDE, durationTime, canvas);
+  easing = document.getElementById("easing").value;
+
+  handleAnimate(startDay, CONST.OPACITY_HIDE, durationTime, canvas, easing);
 
   midDay.animate("opacity", CONST.OPACITY_SHOW, {
     duration: durationTime,
 
     onChange: canvas.requestRenderAll.bind(canvas),
 
-    // onComplete: function () {
-    //   handleAnimate(midDay, CONST.OPACITY_HIDE, durationTime, canvas);
+    easing: fabric.util.ease[easing],
 
-    //   handleAnimate(endDay, CONST.OPACITY_SHOW, durationTime, canvas);
+    // onComplete: function () {
+    //   handleAnimate(midDay, CONST.OPACITY_HIDE, durationTime, canvas,easing);
+
+    //   handleAnimate(endDay, CONST.OPACITY_SHOW, durationTime, canvas,easing);
     // },
   });
 }
 
-function handleAnimate(img, opacityVal, durationTime, canvas) {
+function handleAnimate(img, opacityVal, durationTime, canvas, easing) {
   img.animate("opacity", opacityVal, {
     duration: durationTime,
 
     onChange: canvas.requestRenderAll.bind(canvas),
+
+    easing: fabric.util.ease[easing],
   });
 }
 

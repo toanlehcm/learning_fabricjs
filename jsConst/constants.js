@@ -19,15 +19,15 @@ const CONST = (function () {
 
   const MORNING_GOOD_IMG = "images/morning_good.jpg";
 
-  const MORNING_BAD_IMG = "images/morning_bad.jpg";
+  const MORNING_BAD_IMG = "images/morning_good.jpg";
 
   const AFTERNOON_GOOD_IMG = "images/afternoon_good.jpg";
 
-  const AFTERNOON_BAD_IMG = "images/afternoon_bad.jpg";
+  const AFTERNOON_BAD_IMG = "images/afternoon_good.jpg";
 
   const EVENING_GOOD_IMG = "images/evening_good.jpg";
 
-  const EVENING_BAD_IMG = "images/evening_bad.jpg";
+  const EVENING_BAD_IMG = "images/evening_good.jpg";
 
   const OPACITY_HIDE = 0;
   const OPACITY_SHOW = 1;

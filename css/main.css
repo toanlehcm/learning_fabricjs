@@ -3,6 +3,11 @@
   bottom: 50%;
 }
 
+.wrapper-canvas-bad {
+  position: absolute;
+  bottom: 50%;
+}
+
 .edit-group {
   position: absolute;
   bottom: 34%;
@@ -14,4 +19,12 @@
 
 .msg_error {
   color: red;
+}
+
+.easing-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
