@@ -35,6 +35,9 @@ const CONST = (function () {
   const VALID_EMPTY = "Please enter duration time";
   const VALID_SUCCESS = "Change duration time successful.";
 
+  const BULGE_VALUE = 1;
+  const PINCH_VALUE = -1;
+
   return {
     CANVAS_STYLE_WIDTH: CANVAS_STYLE_WIDTH,
     CANVAS_STYLE_HEIGHT: CANVAS_STYLE_HEIGHT,
@@ -50,5 +53,8 @@ const CONST = (function () {
     VALID_EMPTY: VALID_EMPTY,
     VALID_SUCCESS: VALID_SUCCESS,
     DEFAULT_LENS_POSITION: DEFAULT_LENS_POSITION,
+    CENTER_CANVAS: CENTER_CANVAS,
+    BULGE_VALUE: BULGE_VALUE,
+    PINCH_VALUE: PINCH_VALUE,
   };
 })();

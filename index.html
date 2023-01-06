@@ -10,77 +10,20 @@
   <script src="jsLibrary/jquery-3.4.1.min.js" type="text/javascript"></script>
   <script src="jsLibrary/fabric.min.js" type="text/javascript"></script>
   <script src="jsLibrary/bootstrap.min.js" type="text/javascript"></script>
+  <script src="jsLibrary/glfx.js" type="text/javascript"></script>
   <script src="jsUtil/imageUtil.js" type="text/javascript"></script>
   <script src="jsConst/constants.js" type="text/javascript"></script>
   <script src="js/main.js" type="text/javascript"></script>
 </head>
 
 <body>
-  <div class="wrapper-canvas-bad">
-    <canvas id="canvasBad"></canvas>
-  </div>
-
   <div class="wrapper-canvas">
-    <canvas id="canvasGood"></canvas>
+    <canvas id="canvas_good"></canvas>
   </div>
-
-  <div class="row edit-group w-100">
-    <div class="col-4">
-      <button id="day_to_night" ontouchstart="dayToNight()" style="width: 100px; height: 50px">day to night</button>
-      <button id="night_to_day" ontouchstart="nightToDay()" style="width: 100px; height: 50px">night to day</button>
-    </div>
-
-    <div class="col-4 easing-group">
-      <select id="easing" class="form-select">
-        <option>easeInQuad</option>
-        <option>easeOutQuad</option>
-        <option>easeInOutQuad</option>
-        <option>easeInCubic</option>
-        <option>easeOutCubic</option>
-        <option>easeInOutCubic</option>
-        <option>easeInQuart</option>
-        <option>easeOutQuart</option>
-        <option>easeInOutQuart</option>
-        <option>easeInQuint</option>
-        <option>easeOutQuint</option>
-        <option>easeInOutQuint</option>
-        <option>easeInSine</option>
-        <option>easeOutSine</option>
-        <option>easeInOutSine</option>
-        <option>easeInExpo</option>
-        <option>easeOutExpo</option>
-        <option>easeInOutExpo</option>
-        <option>easeInCirc</option>
-        <option>easeOutCirc</option>
-        <option>easeInOutCirc</option>
-        <option>easeInElastic</option>
-        <option>easeOutElastic</option>
-        <option>easeInOutElastic</option>
-        <option>easeInBack</option>
-        <option>easeOutBack</option>
-        <option>easeInOutBack</option>
-        <option>easeInBounce</option>
-        <option>easeOutBounce</option>
-        <option>easeInOutBounce</option>
-      </select>
-      <button id="animate" class="btn">Animate</button>
-    </div>
-
-    <div class="col-4 container">
-      <form action="index.html" method="post" id="time_of_date" onsubmit="return validateFormTime(event)">
-        <div class="field">
-          <label for="name">Duration Time:</label>
-          <input type="number" id="duration_time" name="duration_time" placeholder="Enter your duration time"
-            style="width: 100px; height: 50px" />
-          <small id="alert_msg"></small>
-        </div>
-
-        <div class="field">
-          <button type="submit" class="full" style="width: 100px; height: 50px">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
+  
+  <!-- <div class="distortion-container">
+    <img id="image" src="images/afternoon_good.jpg" style="width: 100%">
+  </div> -->
 </body>
 
 </html>

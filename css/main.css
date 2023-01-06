@@ -28,3 +28,8 @@
   align-items: center;
   width: 100%;
 }
+
+.distortion-container {
+  position: absolute;
+  bottom: 0%;
+}
