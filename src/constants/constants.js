@@ -1,8 +1,14 @@
 const CONST = (function () {
   const CLIENT_WIDTH = document.documentElement.clientWidth;
   const CLIENT_HEIGHT = document.documentElement.clientHeight;
+
+  const DEVICE_PIXEL_RATIO = 2;
+
   const CANVAS_STYLE_WIDTH = CLIENT_WIDTH;
   const CANVAS_STYLE_HEIGHT = CLIENT_HEIGHT / 2;
+
+  const CANVAS_WIDTH = CANVAS_STYLE_WIDTH * DEVICE_PIXEL_RATIO;
+  const CANVAS_HEIGHT = CANVAS_STYLE_HEIGHT * DEVICE_PIXEL_RATIO;
 
   // The center of the midground canvas.
   const CENTER_CANVAS = {
@@ -29,6 +35,8 @@ const CONST = (function () {
 
   const EVENING_BAD_IMG = "images/evening_good.jpg";
 
+  const BG_INDOOR = "images/bg_all_in_base.jpg";
+
   const OPACITY_HIDE = 0;
   const OPACITY_SHOW = 1;
 
@@ -39,15 +47,23 @@ const CONST = (function () {
   const PINCH_VALUE = -1;
 
   return {
+    DEVICE_PIXEL_RATIO: DEVICE_PIXEL_RATIO,
+
     CANVAS_STYLE_WIDTH: CANVAS_STYLE_WIDTH,
     CANVAS_STYLE_HEIGHT: CANVAS_STYLE_HEIGHT,
+    CANVAS_WIDTH: CANVAS_WIDTH,
+    CANVAS_HEIGHT: CANVAS_HEIGHT,
+
     DESIRED_RADIUS: DESIRED_RADIUS,
+
     MORNING_GOOD_IMG: MORNING_GOOD_IMG,
     MORNING_BAD_IMG: MORNING_BAD_IMG,
     AFTERNOON_GOOD_IMG: AFTERNOON_GOOD_IMG,
     AFTERNOON_BAD_IMG: AFTERNOON_BAD_IMG,
     EVENING_GOOD_IMG: EVENING_GOOD_IMG,
     EVENING_BAD_IMG: EVENING_BAD_IMG,
+    BG_INDOOR: BG_INDOOR,
+
     OPACITY_HIDE: OPACITY_HIDE,
     OPACITY_SHOW: OPACITY_SHOW,
     VALID_EMPTY: VALID_EMPTY,
