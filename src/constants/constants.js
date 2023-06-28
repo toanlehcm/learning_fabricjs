@@ -37,6 +37,8 @@ const CONST = (function () {
 
   const BG_INDOOR = "images/bg_all_in_base.jpg";
 
+  const BG_OUTDOOR = "images/bg_outdoor_test.jpg";
+
   const OPACITY_HIDE = 0;
   const OPACITY_SHOW = 1;
 
@@ -63,6 +65,7 @@ const CONST = (function () {
     EVENING_GOOD_IMG: EVENING_GOOD_IMG,
     EVENING_BAD_IMG: EVENING_BAD_IMG,
     BG_INDOOR: BG_INDOOR,
+    BG_OUTDOOR: BG_OUTDOOR,
 
     OPACITY_HIDE: OPACITY_HIDE,
     OPACITY_SHOW: OPACITY_SHOW,

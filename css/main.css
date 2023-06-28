@@ -1,3 +1,7 @@
+body {
+  margin: auto;
+}
+
 .wrapper-canvas {
   position: absolute;
   bottom: 50%;
@@ -39,4 +43,3 @@
   height: 400px;
   border: 1px solid black;
 }
-

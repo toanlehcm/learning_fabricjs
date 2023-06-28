@@ -5,24 +5,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <link rel="stylesheet" href="css/main.css" type="text/css">
-  <link rel="stylesheet" href="css/package/bootstrap.min.css" type="text/css">
 
   <script src="src/package/jquery-3.4.1.min.js" type="text/javascript"></script>
-  <script src="src/package/fabric.min.js" type="text/javascript"></script>
-  <script src="src/package/bootstrap.min.js" type="text/javascript"></script>
-  <script src="src/package/glfx.js" type="text/javascript"></script>
-  <script src="src/package/d3.min.js" type="text/javascript"></script>
-  <script src="src/package/fisheyed3.js" type="text/javascript"></script>
-  <script src="src/package/fisheye.js" type="text/javascript"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
 </head>
 
 <body>
   <canvas id="canvas"></canvas>
 
-  <!-- <img id="example" width="860" height="530" src="images/bg_all_in_base.jpg" /> -->
+  <label for="intensity_input">Intensity:</label>
+  <input type="range" id="intensity_input" min="0" max="50" value="5" />
+  <br />
 
-  <!-- <div id="container"></div> -->
+  <label for="phase_input">Phase:</label>
+  <input type="range" id="phase_input" min="0" max="2" value="0" />
 </body>
 
 <script src="src/util/imageUtil.js" type="text/javascript"></script>
