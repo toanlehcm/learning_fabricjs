@@ -43,3 +43,16 @@ body {
   height: 400px;
   border: 1px solid black;
 }
+/* -- chromatic aberration -- */
+img {
+  width: 300px;
+}
+
+img.kill {
+  position: relative;
+  -webkit-filter: url(#kill);
+}
+
+canvas.kill {
+  -webkit-filter: url(#kill);
+}
