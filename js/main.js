@@ -1,15 +1,51 @@
-var canvas, context;
+var cvDistortionHardware, ctxDistortionHardware;
+var cvOffscreenHardwareLayer1, ctxOffscreenHardwareLayer1;
+var cvOffscreenHardwareLayer2, ctxOffscreenHardwareLayer2;
+var cvOffscreenHardwareLayer3, ctxOffscreenHardwareLayer3;
+
 var scaleImage = { width: 0, height: 0 }, scale;
 
 var bgImage = new Image();
 bgImage.src = CONST.BG_OUTDOOR;
 
-function initCanvas() {
-  canvas.style.width = CONST.CANVAS_STYLE_WIDTH + "px";
-  canvas.style.height = CONST.CANVAS_STYLE_HEIGHT + "px";
+// Background layer.
+var imgBgLayer = {
+  layer1: new Image(),
+  layer2: new Image(),
+  layer3: new Image(),
+};
 
-  canvas.width = CONST.CANVAS_WIDTH;
-  canvas.height = CONST.CANVAS_HEIGHT;
+imgBgLayer.layer1.src = CONST.BG_LAYER.layer1;
+imgBgLayer.layer2.src = CONST.BG_LAYER.layer2;
+imgBgLayer.layer3.src = CONST.BG_LAYER.layer3;
+
+function initCanvas() {
+  cvDistortionHardware.style.width = CONST.CANVAS_STYLE_WIDTH + "px";
+  cvDistortionHardware.style.height = CONST.CANVAS_STYLE_HEIGHT + "px";
+
+  cvDistortionHardware.width = CONST.CANVAS_WIDTH;
+  cvDistortionHardware.height = CONST.CANVAS_HEIGHT;
+
+  // Canvas offscreen layer 1.
+  cvOffscreenHardwareLayer1.style.width = CONST.CANVAS_STYLE_WIDTH + "px";
+  cvOffscreenHardwareLayer1.style.height = CONST.CANVAS_STYLE_HEIGHT + "px";
+
+  cvOffscreenHardwareLayer1.width = CONST.CANVAS_WIDTH;
+  cvOffscreenHardwareLayer1.height = CONST.CANVAS_HEIGHT;
+
+  // Canvas offscreen layer 2.
+  cvOffscreenHardwareLayer2.style.width = CONST.CANVAS_STYLE_WIDTH + "px";
+  cvOffscreenHardwareLayer2.style.height = CONST.CANVAS_STYLE_HEIGHT + "px";
+
+  cvOffscreenHardwareLayer2.width = CONST.CANVAS_WIDTH;
+  cvOffscreenHardwareLayer2.height = CONST.CANVAS_HEIGHT;
+
+  // Canvas offscreen layer 3.
+  cvOffscreenHardwareLayer3.style.width = CONST.CANVAS_STYLE_WIDTH + "px";
+  cvOffscreenHardwareLayer3.style.height = CONST.CANVAS_STYLE_HEIGHT + "px";
+
+  cvOffscreenHardwareLayer3.width = CONST.CANVAS_WIDTH;
+  cvOffscreenHardwareLayer3.height = CONST.CANVAS_HEIGHT;
 }
 
 function initImageObj() {
@@ -20,18 +56,73 @@ function initImageObj() {
     Math.min(scaleImage.width, scaleImage.height) :
     Math.max(scaleImage.width, scaleImage.height);
 
-  context.drawImage(
+  ctxDistortionHardware.drawImage(
     bgImage,
     0, 0,
     bgImage.width * scale, bgImage.height * scale
   );
+
+  // Canvas offscreen layer 1.
+  ctxOffscreenHardwareLayer1.drawImage(
+    imgBgLayer.layer1,
+    0, 0,
+    imgBgLayer.layer1.width * scale, imgBgLayer.layer1.height * scale
+  );
+
+  // Canvas offscreen layer 2.
+  ctxOffscreenHardwareLayer2.drawImage(
+    imgBgLayer.layer2,
+    0, 0,
+    imgBgLayer.layer2.width * scale, imgBgLayer.layer2.height * scale
+  );
+
+  // Canvas offscreen layer 3.
+  ctxOffscreenHardwareLayer1.drawImage(
+    imgBgLayer.layer3,
+    0, 0,
+    imgBgLayer.layer3.width * scale, imgBgLayer.layer3.height * scale
+  );
+}
+
+function updateDistortionInHardware() {
+  ctxDistortionHardware.drawImage(
+    cvOffscreenHardwareLayer1,
+    0, 0,
+    cvOffscreenHardwareLayer1.width, cvOffscreenHardwareLayer1.height
+  );
+
+  ctxDistortionHardware.drawImage(
+    cvOffscreenHardwareLayer2,
+    0, 0,
+    cvOffscreenHardwareLayer2.width, cvOffscreenHardwareLayer2.height
+  );
+
+  ctxDistortionHardware.drawImage(
+    cvOffscreenHardwareLayer3,
+    0, 0,
+    cvOffscreenHardwareLayer3.width, cvOffscreenHardwareLayer3.height
+  );
 }
 
 window.onload = function init() {
-  canvas = document.getElementById("canvas");
-  context = canvas.getContext("2d");
+  cvDistortionHardware = document.getElementById("distortion_hardware");
+  ctxDistortionHardware = cvDistortionHardware.getContext("2d");
+
+  // Canvas offscreen layer 1.
+  cvOffscreenHardwareLayer1 = document.createElement("canvas");
+  ctxOffscreenHardwareLayer1 = cvOffscreenHardwareLayer1.getContext("2d");
+
+  // Canvas offscreen layer 2.
+  cvOffscreenHardwareLayer2 = document.createElement("canvas");
+  ctxOffscreenHardwareLayer2 = cvOffscreenHardwareLayer2.getContext("2d");
+
+  // Canvas offscreen layer 3.
+  cvOffscreenHardwareLayer3 = document.createElement("canvas");
+  ctxOffscreenHardwareLayer3 = cvOffscreenHardwareLayer3.getContext("2d");
 
   initCanvas();
 
   initImageObj();
+
+  updateDistortionInHardware();
 };

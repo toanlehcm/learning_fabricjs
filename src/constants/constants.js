@@ -37,7 +37,7 @@ const CONST = (function () {
 
   const BG_INDOOR = "images/bg_all_in_base.jpg";
 
-  const BG_OUTDOOR = "images/bg_outdoor_test.jpg";
+  const BG_OUTDOOR = "images/bg_outdoor.jpg";
 
   const OPACITY_HIDE = 0;
   const OPACITY_SHOW = 1;
@@ -47,6 +47,16 @@ const CONST = (function () {
 
   const BULGE_VALUE = 1;
   const PINCH_VALUE = -1;
+
+  const BG_LAYER = {
+    // layer1: "images/layer_1.png",
+    // layer2: "images/layer_2.png",
+    // layer3: "images/layer_3.png",
+
+    layer1: "images/layer_1_blur.png",
+    layer2: "images/layer_2_blur.png",
+    layer3: "images/layer_3_blur.png",
+  }
 
   return {
     DEVICE_PIXEL_RATIO: DEVICE_PIXEL_RATIO,
@@ -75,5 +85,7 @@ const CONST = (function () {
     CENTER_CANVAS: CENTER_CANVAS,
     BULGE_VALUE: BULGE_VALUE,
     PINCH_VALUE: PINCH_VALUE,
+
+    BG_LAYER: BG_LAYER
   };
 })();

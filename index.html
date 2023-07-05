@@ -10,30 +10,7 @@
 </head>
 
 <body>
-  <canvas id="canvas" class="kill"></canvas>
-
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png" />
-  <img class="kill" src="https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png" />
-
-  <svg width="0" height="0">
-    <filter id="kill">
-      <feColorMatrix type="matrix" result="red_" values="4 0 0 0 0
-                0 0 0 0 0 
-                0 0 0 0 0 
-                0 0 0 1 0" />
-
-      <feOffset in="red_" dx="2" dy="0" result="red" />
-
-      <feColorMatrix type="matrix" in="SourceGraphic" result="blue_" values="0 0 0 0 0
-                0 3 0 0 0 
-                0 0 10 0 0 
-                0 0 0 1 0" />
-
-      <feOffset in="blue_" dx="-3" dy="0" result="blue" />
-
-      <feBlend mode="screen" in="red" in2="blue" />
-    </filter>
-  </svg>
+  <canvas id="distortion_hardware" style="background-color: rgb(184, 180, 180);"></canvas>
 </body>
 
 <script src="src/util/imageUtil.js" type="text/javascript"></script>
