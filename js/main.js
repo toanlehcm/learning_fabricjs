@@ -1,5 +1,5 @@
 var cvDistortionHardware, ctxDistortionHardware;
-var cvOffscreenHardwareMain, ctxOffscreenHardwareMain;
+var cvOffscreenHardwareLayerMain, ctxOffscreenHardwareLayerMain;
 var cvOffscreenHardwareLayer1, ctxOffscreenHardwareLayer1;
 var cvOffscreenHardwareLayer2, ctxOffscreenHardwareLayer2;
 var cvOffscreenHardwareLayer3, ctxOffscreenHardwareLayer3;
@@ -28,11 +28,11 @@ function initCanvas() {
   cvDistortionHardware.height = CONST.CANVAS_HEIGHT;
 
   // Canvas offscreen main.
-  cvOffscreenHardwareMain.style.width = CONST.CANVAS_STYLE_WIDTH + "px";
-  cvOffscreenHardwareMain.style.height = CONST.CANVAS_STYLE_HEIGHT + "px";
+  cvOffscreenHardwareLayerMain.style.width = CONST.CANVAS_STYLE_WIDTH + "px";
+  cvOffscreenHardwareLayerMain.style.height = CONST.CANVAS_STYLE_HEIGHT + "px";
 
-  cvOffscreenHardwareMain.width = CONST.CANVAS_WIDTH;
-  cvOffscreenHardwareMain.height = CONST.CANVAS_HEIGHT;
+  cvOffscreenHardwareLayerMain.width = CONST.CANVAS_WIDTH;
+  cvOffscreenHardwareLayerMain.height = CONST.CANVAS_HEIGHT;
 
   // Canvas offscreen layer 1.
   cvOffscreenHardwareLayer1.style.width = CONST.CANVAS_STYLE_WIDTH + "px";
@@ -64,7 +64,7 @@ function initImageObj() {
     Math.min(scaleImage.width, scaleImage.height) :
     Math.max(scaleImage.width, scaleImage.height);
 
-  ctxOffscreenHardwareMain.drawImage(
+  ctxOffscreenHardwareLayerMain.drawImage(
     bgImage,
     0, 0,
     bgImage.width * scale, bgImage.height * scale
@@ -95,21 +95,21 @@ function initImageObj() {
 function updateDistortionInHardware() {
 
   // Layer 1.
-  ctxOffscreenHardwareMain.drawImage(
+  ctxOffscreenHardwareLayerMain.drawImage(
     cvOffscreenHardwareLayer1,
     0, 0,
     cvOffscreenHardwareLayer1.width, cvOffscreenHardwareLayer1.height
   );
 
   // Layer 2.
-  ctxOffscreenHardwareMain.drawImage(
+  ctxOffscreenHardwareLayerMain.drawImage(
     cvOffscreenHardwareLayer2,
     0, 0,
     cvOffscreenHardwareLayer2.width, cvOffscreenHardwareLayer2.height
   );
 
   // Layer 3.
-  ctxOffscreenHardwareMain.drawImage(
+  ctxOffscreenHardwareLayerMain.drawImage(
     cvOffscreenHardwareLayer3,
     0, 0,
     cvOffscreenHardwareLayer3.width, cvOffscreenHardwareLayer3.height
@@ -117,9 +117,9 @@ function updateDistortionInHardware() {
 
   // Canvas distortion hardware.
   ctxDistortionHardware.drawImage(
-    cvOffscreenHardwareMain,
+    cvOffscreenHardwareLayerMain,
     0, 0,
-    cvOffscreenHardwareMain.width, cvOffscreenHardwareMain.height
+    cvOffscreenHardwareLayerMain.width, cvOffscreenHardwareLayerMain.height
   );
 }
 
@@ -128,8 +128,8 @@ window.onload = function init() {
   ctxDistortionHardware = cvDistortionHardware.getContext("2d");
 
   // Canvas offscreen main.
-  cvOffscreenHardwareMain = document.createElement("canvas");
-  ctxOffscreenHardwareMain = cvOffscreenHardwareMain.getContext("2d");
+  cvOffscreenHardwareLayerMain = document.createElement("canvas");
+  ctxOffscreenHardwareLayerMain = cvOffscreenHardwareLayerMain.getContext("2d");
 
   // Canvas offscreen layer 1.
   cvOffscreenHardwareLayer1 = document.createElement("canvas");
