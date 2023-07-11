@@ -49,13 +49,14 @@ const CONST = (function () {
   const PINCH_VALUE = -1;
 
   const BG_LAYER = {
-    // layer1: "images/layer_1.png",
-    // layer2: "images/layer_2.png",
-    // layer3: "images/layer_3.png",
+    main: "images/bg_outdoor.jpg",
+    one: "images/layer_1.png",
+    two: "images/layer_2.png",
+    three: "images/layer_3.png",
 
-    layer1: "images/layer_1_blur.png",
-    layer2: "images/layer_2_blur.png",
-    layer3: "images/layer_3_blur.png",
+    // one: "images/layer_1_blur.png",
+    // two: "images/layer_2_blur.png",
+    // three: "images/layer_3_blur.png",
   }
 
   return {
